@@ -33,6 +33,48 @@
         "https://tradingeconomics.com/commodity/crude-oil",
         "https://www.jpmorgan.com/insights/global-research/commodities/oil-prices"
       ]
+    },
+    {
+      "ts": "2026-08-20T11:59:35.459Z",
+      "action": "ADD",
+      "symbol": "USOX_USDT",
+      "notional_usdt": 25,
+      "filled_size": "0.1843521",
+      "fill_price": "135.61",
+      "fee": "0.0001843521 USOX",
+      "net_added": "0.1841677479",
+      "position_after": "0.5536750707",
+      "blended_cost_basis": "135.46",
+      "orderId": 11016007643606336,
+      "result": "filled",
+      "preflight": "APPROVED",
+      "confidence": "HIGH",
+      "reasoning": "Pass 1 found the USOX thesis strengthened, not merely intact: all three falsifiers moved further away. Trump cut off talks and announced secondary sanctions on any country supporting Iran (a genuine supply removal, ~1.5 mb/d of Iranian exports, distinct from the Hormuz transit story); Iran put ballistic missiles into UAE territory and the UAE severed all trade and financial ties. WTI printed 87.16, a four-week high. On the priced-in scan USOX is the LEAST moved of everything that moved (+2.93% vs silver +4.27% and crypto +10-20%), while being the most direct instrument of the largest live event, and WTI at 87 still sits well below the 105 it printed on 23 July. Everything else on the menu was either already traded out (crypto, on forced short covering) or not expressible long-only (short equities/NVDAX).",
+      "counter_case": "Five arguments against, all still standing. (1) Concentration: this takes USOX to ~50% of a 150 USDT book. (2) EIA sees Brent averaging 69/b in 2027 as inventories rebuild and OPEC+ keeps adding barrels — the glut is real and this is a timing trade, not a structural one. (3) Trump escalate-then-deal is a well-worn pattern and CNN openly questions whether he stays the course; a surprise deal is a fast -10%. (4) +3.3% of today is already traded. (5) USOX tracks WTI futures and bleeds on contango. Sixth and heaviest: there is NO resting downside protection possible on this venue and I do not exist between runs. That last point gated the trade — I planned to skip the add if a stop could not be rested, then revised on learning WHY it could not: the spot API has no stop type at all, and this is unleveraged spot, which cannot be liquidated. Bounded drawdown, not ruin. So it moderated the size (25, not the 40-50 the conviction would otherwise justify) rather than vetoing it. Half the book stays in cash.",
+      "falsifier": "Unchanged and explicit: a credible restart of US-Iran negotiations, confirmed reopening of Hormuz transit, or WTI closing below 80. Add to those: visible follow-through failure on the secondary-sanctions threat (major buyers of Iranian crude carrying on unpunished within ~2 weeks).",
+      "sources": [
+        "https://www.thenationalnews.com/news/us/2026/08/19/trump-announces-most-crushing-economic-operation-ever-taken-against-iran/",
+        "https://www.thenationalnews.com/news/uae/2026/08/18/uae-suspends-trade-and-financial-transactions-with-iran/",
+        "https://www.cnn.com/2026/08/18/business/iran-strait-of-hormuz-oil",
+        "https://tradingeconomics.com/commodity/crude-oil",
+        "https://www.eia.gov/outlooks/steo/report/global_oil.php"
+      ]
+    },
+    {
+      "ts": "2026-08-20T11:59:35.460Z",
+      "action": "REDUCE",
+      "order_kind": "resting take-profit (GTC limit)",
+      "symbol": "USOX_USDT",
+      "size": "0.193",
+      "limit_price": "148.00",
+      "notional_if_filled_usdt": 28.56,
+      "orderId": 11016007643606584,
+      "result": "OPEN — resting on the exchange",
+      "preflight": "APPROVED",
+      "confidence": "MED",
+      "reasoning": "The only resting order type this venue offers is a plain limit, so it is used where it actually helps. 148 is roughly WTI 95, a reachable escalation target (+9.2% from here). It covers ~35% of the position. Because I run only a few times a day, an intraday headline spike would otherwise be slept through and mean-revert before the next run; this converts the gap between runs from pure liability into partial asset on the upside. The remaining ~65% stays uncapped for the 105-retest case.",
+      "counter_case": "It caps 35% of the upside if oil runs straight through 148, and the units are frozen — a thesis-break exit next run requires cancelling this order first before selling. Both accepted as cheap.",
+      "note": "A protective stop below market is NOT possible here (see venue_findings). Handed to Erik as manual app steps instead."
     }
   ],
   "passed_on": [
@@ -58,5 +100,20 @@
       "blocker": "CCJX_USDT, NLRX_USDT and SMRX_USDT are all enable=false on Pionex. 71 of 406 symbols are disabled; the entire uranium complex is among them.",
       "handoff": "Requires a different venue for Erik to act on. Not executable here at any size."
     }
-  ]
+  ],
+  "world_sweep_run2": {
+    "ts": "2026-08-20T11:52Z",
+    "iran_escalation": "Iran fired two ballistic missiles at UAE territory 08-18 (Iran denies). UAE suspended ALL trade, commercial exchange and financial transactions with Iran until further notice — Iran loses its main commercial lifeline. Trump 08-19 announced the \"most crushing economic operation ever taken\" against any country: Economic Warfare and Isolation, secondary sanctions on any country supporting Iran, and said he is cutting off talks. Iran FM Araghchi dismissed it as \"so-called Economic D-Day\".",
+    "oil_price": "WTI 87.16 (+3.29% on the day), highest since 24 July. Q3 forecast 84.30, 12-month 98.26 (tradingeconomics). EIA raised Q3 Brent to ~85/b (+11/b vs prior month) but sees Brent falling to ~69/b average in 2027 as inventories rebuild.",
+    "counter_signal": "CNN 08-18: Kpler says Iran has at least partially lost control of the strait to US naval patrols. Energy Secretary Wright claims flows far exceed market perception — but tracking showed ~5 vessels exiting the day he claimed 20M bbl moved.",
+    "fed": "Markets now lean toward a September 25bp HIKE, explicitly attributed to energy shocks (Chase). July was a hold at 3.50-3.75 with three hike dissents. Read-through: the same energy shock driving USOX raises the discount rate on equities, metals and crypto.",
+    "priced_in_scan_24h": "ETH +19.97, BMNRX +19.15, XRP +18.66, CRCLX +17.13, SOL +13.03, BTC +11.70, DOGE +10.14, LINK +9.84, STRAX +4.44, SLVX +4.27, TSLAX +3.50, USOX +2.93, AAPLX +2.00, AMZNX +1.82, METAX +1.02, GOOGLX +0.19, SPYX -0.09, QQQX -0.49, NVDAX -0.87",
+    "universe_recheck": "406 symbols, 335 enabled — unchanged. Uranium complex CCJX/NLRX/SMRX all still enable=false. Same 13 tokenized equity/ETF/commodity names tradeable."
+  },
+  "venue_findings": {
+    "no_stop_orders": "CONFIRMED by probe. Pionex spot API accepts MARKET and LIMIT only. STOP, STOP_LIMIT, STOP_LOSS, STOP_LOSS_LIMIT, STOP_MARKET, TAKE_PROFIT, OCO and CONDITIONAL all rejected with TRADE_PARAMETER_ERROR \"invalid type\". No fills, no cost. Resolves the open item left by run 1: a protective stop CANNOT be rested on spot via API.",
+    "no_perpetuals": "CLI capabilities expose market/account/wallet/orders(spot)/bot(futures_grid,spot_grid)/earn(dual) only. There is no plain perpetual order path, so no clean way to express a SHORT. futures_grid is the sole shorting mechanism and is range-bound — wrong instrument for a trending escalation.",
+    "size_filters": "USOX_USDT basePrecision=3 (size max 3 dp), minAmount=10 USDT, buyCeiling=1.1 / sellFloor=0.9 — limit orders must rest within +/-10% of market. A take-profit further out than +10% cannot be placed."
+  },
+  "equity_end_usdt": 149.89
 }
