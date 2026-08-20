@@ -1,0 +1,52 @@
+{
+  "_comment": "UNRESTRICTED MODE, set by Erik on 2026-08-20. Every discretionary limit is null = no limit. The gate in lib/preflight.mjs still runs on every order so the kill switch and the audit log keep working, but it no longer constrains what the trader may do. Setting any null back to a number re-arms that specific check immediately — nothing needs rebuilding.",
+
+  "mode": "unrestricted",
+  "enabled": false,
+
+  "capital": {
+    "_note": "null = unlimited. Percentages are of live equity from state/account.json.",
+    "max_notional_per_order_pct": null,
+    "max_notional_per_symbol_pct": null,
+    "max_total_exposure_pct": null,
+    "min_cash_reserve_pct": null,
+    "absolute_max_notional_per_order_usdt": null,
+
+    "_min_notional_note": "Not a policy choice — Pionex rejects orders under minAmount (10 USDT on the pairs checked 2026-08-20). Kept so doomed orders fail here instead of burning a round trip.",
+    "min_notional_usdt": 10
+  },
+
+  "risk": {
+    "_note": "Trader's discretion. Leverage, direction, sizing, stops are all judgment calls now.",
+    "max_leverage": null,
+    "max_open_positions": null,
+    "max_orders_per_day": null,
+    "max_daily_realized_loss_pct": null,
+    "max_drawdown_pct_from_peak": null,
+    "require_resting_stop": false
+  },
+
+  "actions": {
+    "_note": "Everything Pionex allows: spot both ways, perps long and short, bots. TRANSFER and WITHDRAW stay denied because the API key does not carry that permission and moving money out is not trading — it is outside the mandate, not a limit on it.",
+    "allowed": ["OPEN_LONG", "OPEN_SHORT", "CLOSE", "REDUCE", "ADD", "BOT_CREATE", "BOT_ADJUST", "BOT_CANCEL"],
+    "denied": ["TRANSFER", "WITHDRAW"]
+  },
+
+  "symbols": {
+    "_note": "mode 'any' = all 406 spot pairs plus perps, crypto and tokenized equities/ETFs/commodities alike.",
+    "mode": "any",
+    "allowed": []
+  },
+
+  "confidence": {
+    "_note": "null = no minimum. Confidence is still recorded on every order so the scored record stays meaningful.",
+    "min_to_open": null,
+    "min_to_add": null,
+    "min_to_close": null
+  },
+
+  "cooldowns": {
+    "min_minutes_between_orders_same_symbol": 0,
+    "no_trade_within_minutes_of_scheduled_catalyst": 0
+  }
+}
