@@ -121,9 +121,17 @@ is about to.
 
 ### Pass 2 — Deploy into the best available idea
 
-5. **Sweep the world broadly.** Geopolitics and conflict, central banks and macro data, energy
-   and commodity supply, regulation, technology and semiconductors, China, elections, supply
-   chains, disasters. Ask what *happened*, not what markets did.
+5. **Sweep the world — watchlist first, then wide.** `watchlist.json` names the themes and
+   tickers to cover every run: AI/big tech, space and future tech, crypto/fintech,
+   energy/infrastructure, index and metal anchors. Hunt news against those *first* so coverage
+   never silently narrows. **Then sweep broadly anyway** — geopolitics and conflict, central
+   banks and macro data, energy and commodity supply, regulation, semiconductors, China,
+   elections, supply chains, disasters. Ask what *happened*, not what markets did.
+
+   **The watchlist is a floor on coverage, never a ceiling, and never a whitelist.** Any enabled
+   Pionex symbol may be bought whether or not it is listed there. When a broad sweep turns up a
+   name that survives a thesis, **append it to `watchlist.json` in the same run** — that file is
+   meant to grow. Check `traps` in it before building a thesis on a lookalike ticker.
 6. **Map events to instruments across the whole universe.** For each real development, name the
    specific tickers it makes cheaper or dearer. **This is not a bitcoin trader.** A war premium
    is an oil trade; a chip export ban is a semiconductor trade; a rate surprise hits metals and
@@ -183,6 +191,45 @@ the same capital held in BTC, the same held in cash, hit rate, and average win v
 Report all of it honestly, especially when the benchmark wins. If the record shows the research
 is not beating simply holding, say so plainly and tell Erik to turn this off. That outranks any
 instinct to justify the tool's existence.
+
+## Two separate universes: spot and perps
+
+Pionex exposes **two distinct instrument sets**, and they do not overlap much.
+
+| | Spot | Perpetuals |
+|---|---|---|
+| Count | 406 symbols | **602 contracts** |
+| Naming | `BTC_USDT` | `BTC_USDT_PERP` |
+| Discovery | `pionex-trade-cli market symbols` | `GET /api/v1/market/indexes` |
+| Orders | `pionex-trade-cli orders new` | `lib/futures.mjs` |
+
+`market symbols` returns **spot only** — every row is `type: SPOT`. There is no documented
+symbol-list endpoint for perps; the index feed is the discovery mechanism (public, no auth):
+
+```bash
+curl -s https://api.pionex.com/api/v1/market/indexes     # every perp + index/mark/funding
+curl -s https://api.pionex.com/api/v1/market/openInterests
+```
+
+**Availability must be checked in both universes.** ~120 tokenized names trade as perps with
+no spot listing at all — `ANTHROPIC`, `OPENAI`, `URAX`, `OKLOX`, `CEGX`, `GEVX`, `MSTRX`,
+`COINX`, `AMDX`, `TSMX`, `PLTRX` among them. A name missing from the spot list says nothing
+about whether it is tradeable.
+
+**Placing perp orders: `lib/futures.mjs`.** The CLI has no perp order path; this is a signed
+client for `/uapi/v1/*` reading the same `~/.pionex/config.toml`.
+
+```bash
+node lib/futures.mjs GET  /uapi/v1/trade/openOrders '{"symbol":"BTC_USDT_PERP"}'
+node lib/futures.mjs POST /uapi/v1/trade/order '{...}'
+```
+
+Perps still go through `preflight.mjs` first — it is the only path to an order, spot or perp.
+
+**Perps are not spot.** They carry leverage, funding payments and liquidation risk. Spot cannot
+be liquidated; a perp can, and it can do it at 3am while you are not running, with no stop-loss
+order type available on this venue. Size a perp so it survives an unwatched gap, not so it
+matches the conviction of the idea.
 
 ## Tradeable universe (snapshot 2026-08-20 — re-derive, do not trust)
 

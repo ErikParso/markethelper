@@ -1,0 +1,67 @@
+{
+  "_what_this_is": "A research WATCHLIST, not a whitelist. It seeds pass 2 — these are names to hunt news for first. It NEVER gates a trade: any listed Pionex instrument may be traded whether or not it appears here. Erik set this up on 2026-08-20 and asked that it grow every run.",
+
+  "_availability_is_two_sided": "Pionex has two separate instrument sets. SPOT: 406 symbols, named BTC_USDT, listed by `market symbols`, ordered via pionex-trade-cli. PERP: 602 contracts, named BTC_USDT_PERP, discovered via GET https://api.pionex.com/api/v1/market/indexes (public, no auth — there is no documented symbol-list endpoint), ordered via lib/futures.mjs. ~120 tokenized names trade as perps with no spot listing. Check both before judging a name tradeable.",
+
+  "_how_to_use_it": [
+    "Pass 2: hunt news against the themes and tickers below FIRST, so coverage never silently narrows.",
+    "Then sweep world news broadly anyway. The watchlist is a floor on coverage, never a ceiling.",
+    "Any new name that survives a thesis gets appended here in the same run.",
+    "Verify availability before trading: spot via `market symbols` + enable flag, perps via /api/v1/market/indexes.",
+    "Perp orders go through lib/futures.mjs — pionex-trade-cli has no perp path at all."
+  ],
+
+  "verified_on": "2026-08-20",
+  "universe_size": { "spot_symbols": 406, "perp_contracts": 602, "tokenized_perps": 130, "tradeable_tokenized_spot": 13 },
+
+  "tradeable": {
+    "ai_bigtech": {
+      "spot": ["NVDAX_USDT", "GOOGLX_USDT", "AMZNX_USDT", "METAX_USDT", "AAPLX_USDT"],
+      "perp_only": ["AMDX", "AVGOX", "MSFTX", "PLTRX", "APPX", "ORCLX", "TSMX", "CRWVX", "NBISX", "IRENX"],
+      "watch_for": "AI capex guidance, chip export policy and tariffs, Nvidia China share loss, Huawei Ascend parity, hyperscaler datacenter power deals, earnings dates"
+    },
+    "ai_labs_private": {
+      "perp_only": ["ANTHROPIC", "OPENAI"],
+      "note": "Confirmed live 2026-08-20: ANTHROPIC_USDT_PERP index 1803.86, OPENAI_USDT_PERP index 1231.50. Erik has traded ANTHROPIC before. These are private-company exposure vehicles — no public float, so price discovery is thin and idiosyncratic. Treat funding rate and open interest as primary signals, not just news.",
+      "watch_for": "funding rounds and valuation marks, model launches, enterprise deals, compute contracts, regulatory action on frontier AI, key-person news"
+    },
+    "space_futuretech": {
+      "spot": ["TSLAX_USDT"],
+      "perp_only": ["ASTSX", "RKLBX", "RGTIX"],
+      "watch_for": "launch cadence and failures, defence and government contracts, spectrum rulings, deliveries, robotaxi regulation, quantum milestones"
+    },
+    "crypto_fintech": {
+      "spot": ["CRCLX_USDT", "BMNRX_USDT", "BTC_USDT", "ETH_USDT"],
+      "perp_only": ["COINX", "MSTRX", "HOODX"],
+      "watch_for": "SEC/CFTC rulemaking, stablecoin legislation, ETF flows, Treasury liquidity operations, exchange incidents, funding and liquidation cascades"
+    },
+    "energy_infra_nuclear": {
+      "spot": ["USOX_USDT"],
+      "perp_only": ["URAX", "OKLOX", "CEGX", "GEVX"],
+      "note": "The AI-power/nuclear thesis is expressible entirely through perps: URAX (uranium ETF), OKLOX (Oklo, SMR), CEGX (Constellation), GEVX (GE Vernova). None has a spot listing. Structural drivers as of 2026-08-20: uranium long-term contracts $90/lb (highest since 2008), 2025 supply 173M lb against 204M lb demand, DOE projecting datacenters at 12% of US electricity by 2028, Constellation guiding hyperscaler spend +75% YoY.",
+      "watch_for": "Hormuz and US-Iran escalation, sanctions enforcement, OPEC+ quotas, EIA/IEA balances, uranium contract prices and supply deficit, SMR approvals, hyperscaler power purchase agreements, grid buildout"
+    },
+    "anchors_metals": {
+      "spot": ["QQQX_USDT", "SPYX_USDT", "SLVX_USDT"],
+      "watch_for": "Fed path and dissents, CPI and jobs prints, real yields and DXY, risk-on/off breadth, industrial and safe-haven silver demand"
+    }
+  },
+
+  "confirmed_unavailable": {
+    "_note": "Checked against BOTH spot and perp universes on 2026-08-20, including alternate tickers. Re-check periodically; listings change.",
+    "RIVNX": "Rivian — no spot, no perp, no similar ticker.",
+    "IONQX": "IonQ — spot exists but enable=false; no perp. RGTIX covers quantum instead.",
+    "CCJX": "Cameco — spot enable=false; no perp. Use URAX for uranium exposure.",
+    "SMRX": "spot enable=false; no perp. Use OKLOX for SMR exposure.",
+    "VSTX": "Vistra — no spot, no perp. Use CEGX or GEVX for power."
+  },
+
+  "traps": {
+    "XAI_USDT": "The spot XAI is the Xai gaming-blockchain token, NOT Elon Musk's xAI. XAI_USDT_PERP indexes at 0.0074, confirming it tracks the same small-cap token. Do not map AI-lab news onto it.",
+    "STRAX_USDT": "Stratis, a crypto trading near $0.0087 — not a tokenized equity, despite the trailing X. A ticker ending in X is not proof of a tokenized stock; check the price against the real underlying.",
+    "BMNRX_USDT": "Tradeable, but its underlying company is UNVERIFIED. Do not build a thesis on it until identified.",
+    "spot_vs_perp": "A name absent from `market symbols` is not absent from Pionex. Check the perp universe before concluding anything is untradeable."
+  },
+
+  "perp_risk_note": "Perps carry leverage, funding payments and liquidation risk. Spot cannot be liquidated; a perp can. No stop-loss order type exists on this venue, and the agent does not run between sessions — so an adverse move on a leveraged perp can liquidate unattended. Size perps for survival across an unwatched gap, not for the conviction of the idea."
+}
