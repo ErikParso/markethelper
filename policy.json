@@ -2,7 +2,7 @@
   "_comment": "UNRESTRICTED MODE, set by Erik on 2026-08-20. Every discretionary limit is null = no limit. The gate in lib/preflight.mjs still runs on every order so the kill switch and the audit log keep working, but it no longer constrains what the trader may do. Setting any null back to a number re-arms that specific check immediately — nothing needs rebuilding.",
 
   "mode": "unrestricted",
-  "enabled": false,
+  "enabled": true,
 
   "capital": {
     "_note": "null = unlimited. Percentages are of live equity from state/account.json.",

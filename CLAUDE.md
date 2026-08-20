@@ -100,20 +100,40 @@ account together.
 
 ## Run protocol (`/autotrade`)
 
-1. **Snapshot.** `wallet balance_full`, plus bots and open orders. Write `state/account.json`
-   (`as_of`, equity, peak equity, cash, exposure by symbol, open position count). Preflight
-   rejects snapshots older than 15 minutes.
-2. **Read the world.** Regime for crypto and equities; catalysts and news bearing on what is
-   held and what is a candidate.
-3. **Priced-in check.** Did the market already move on this? Then it is history, not an edge.
-4. **Decide.** Buy, sell, close, switch, wait — or a combination. Argue the counter-case to
-   yourself before committing size.
-5. **Preflight, then execute.**
-6. **Log** to `trades/YYYY-MM-DD.json`: order, reasoning, sources, confidence, result.
-7. **Report** to Erik: what you did, why, what you passed on, exposure, P&L.
+**The world comes first. The chart comes last.** World events shape where markets go; price
+only tells you what already happened. A run that starts by looking at candles has already
+failed — it can find what moved, never what is about to.
 
-Doing nothing is a legitimate outcome and often the right one. A quiet market should produce a
-three-line report, not manufactured activity.
+1. **Read the world.** Broad sweep, before opening a single chart and before looking at the
+   account. Geopolitics and conflict, central banks and macro data, energy and commodity
+   supply, regulation and policy, technology and semiconductors, China, elections, supply
+   chains, weather and disaster. Ask what *happened*, not what markets did.
+
+2. **Map events to instruments — across the whole universe.** For each real development, ask
+   what it makes cheaper or dearer, and name specific tickers. Pionex lists ~406 spot pairs:
+   crypto, tokenized US equities (AAPLX, NVDAX, TSLAX, METAX, GOOGLX, AMZNX …), index ETFs
+   (SPYX, QQQX), and commodities (SLVX silver, USOX oil, COPXX copper, NLRX/CCJX uranium).
+   **This is not a bitcoin trader.** A war premium is an oil and defence trade; a chip export
+   ban is a semiconductor trade; a rate surprise moves metals and equities before crypto. If
+   every run reaches for BTC, the mapping step is not being done.
+
+3. **Then check the market** — only for the instruments the news pointed at. Price action
+   confirms, sizes, and times the idea; it does not generate it.
+
+4. **Priced-in check.** Did the market already move on this? Then it is history, not an edge.
+   Prefer the event whose consequence has not yet been traded.
+
+5. **Decide, across the whole book.** Buy, sell, close, switch, wait, or a combination.
+   **If capital is tied up, decide whether to close something to fund something better** —
+   that is a normal move, not a last resort. Rank candidates against each other and against
+   what is already held; holding is only correct if it beats every alternative. Argue the
+   counter-case before committing size.
+
+6. **Preflight, then execute.**
+7. **Log** to `trades/YYYY-MM-DD.json`: order, reasoning, sources, confidence, result.
+8. **Report** to Erik: what you did, why, what you passed on, exposure, P&L.
+
+Doing nothing is a legitimate outcome — but only after the sweep, never as a way to avoid it.
 
 ## Evidence
 

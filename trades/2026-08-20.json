@@ -1,0 +1,62 @@
+{
+  "date": "2026-08-20",
+  "equity_start_usdt": 149.77,
+  "realized_pnl_usdt": 0,
+  "world_sweep": {
+    "hormuz": "Strait of Hormuz closed. US naval blockade in effect, 8 vessel attacks reported this month, Trump confirms no negotiations with Tehran. Five-month US-Israel-Iran war in fragile pause. Oil spiked to $105/bbl on 2026-07-23, now ~$86.",
+    "oil_supply_demand": "Counterweight: OPEC+ raising production into a 2026 glut; IEA and OPEC both cut 2026 demand by ~1.6 mb/d because of the closure. JPM sees Brent $86 Q3 -> $80 Q4 -> $78 year end. Goldman also lower.",
+    "uranium": "Long-term contract uranium $90/lb, highest since 2008. 2025 supply 173M lb vs demand 204M lb. AI datacenters: DOE projects 12% of US electricity by 2028; Constellation guides hyperscaler spend +75% YoY. Strongest structural signal found — but untradeable, see blocked_ideas.",
+    "semis": "Nvidia China AI-chip share forecast to fall 40% -> 8%; Huawei Ascend 950 rated comparable to H200; export policy incoherent with a 25% tariff. Structurally negative for NVDAX.",
+    "crypto": "08-19 rally on SEC proposed framework (mature assets exiting securities classification) plus Treasury doubling bond buybacks — amplified by ~$1.44B of short liquidations.",
+    "fed": "Held 3.50-3.75% but 9-3 with three dissenters wanting a hike; September hike odds ~72%. FOMC minutes 2026-08-20 18:00 UTC."
+  },
+  "orders": [
+    {
+      "ts": "2026-08-20T11:15:12Z",
+      "action": "OPEN_LONG",
+      "symbol": "USOX_USDT",
+      "notional_usdt": 50,
+      "filled_size": "0.3698772",
+      "fill_price": "135.18",
+      "fee": "0.0003698772 USOX",
+      "net_position": "0.3695073228",
+      "orderId": 11016007643589092,
+      "result": "filled",
+      "preflight": "APPROVED",
+      "confidence": "MED",
+      "reasoning": "Most direct tradeable expression of the largest live geopolitical event. Hormuz is under active naval blockade with no negotiations, yet USOX is calm at +2.11% and oil sits ~$86 — well below the $105 it printed on 23 July. The market is pricing reopening and the OPEC+ glut. That makes the payoff asymmetric: escalation or simple persistence retests ~$105 (+22%), resolution takes oil to ~$78 (-9%). Book is liquid (0.03% spread, deep top of book) so entry cost is negligible.",
+      "counter_case": "The closure is simultaneously bearish demand — the same blockade is why IEA/OPEC cut forecasts 1.6 mb/d. Both Goldman and JPM forecast oil lower into year end, and OPEC+ keeps adding barrels. If Hormuz reopens this is a fast -10%. USOX also tracks WTI futures, so contango decay bleeds a long position held for months.",
+      "falsifier": "A credible US-Iran negotiation restart, or confirmed reopening of Hormuz transit. Also exit if WTI closes below ~$80, which would confirm glut over geopolitics.",
+      "sources": [
+        "https://www.iea.org/reports/oil-market-report-august-2026",
+        "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Fall-as-OPEC-and-IEA-Slash-2026-Demand-Outlooks.html",
+        "https://tradingeconomics.com/commodity/crude-oil",
+        "https://www.jpmorgan.com/insights/global-research/commodities/oil-prices"
+      ]
+    }
+  ],
+  "passed_on": [
+    {
+      "symbol": "crypto (BTC/ETH/SOL)",
+      "verdict": "WAIT",
+      "why": "BTC +11.1% and ETH +19.0% in two days, substantially forced short covering (~$1.44B liquidated). Catalyst is real but now in the price, and FOMC minutes land in 7h against a Fed that split 9-3 with hike dissenters."
+    },
+    {
+      "symbol": "NVDAX_USDT",
+      "verdict": "AVOID",
+      "why": "Structurally negative on China share collapse, but spot is long-only — no way to express it. Noted as a reason not to hold big-tech tokenized exposure."
+    },
+    {
+      "symbol": "SLVX_USDT",
+      "verdict": "WAIT",
+      "why": "Just exited at +16%. Silver is rate-sensitive and hawkish minutes would hurt it. Re-entry considered after 18:00 UTC."
+    }
+  ],
+  "blocked_ideas": [
+    {
+      "thesis": "Uranium / nuclear — strongest structural signal of the sweep: 18-year-high contract price, a 31M lb supply deficit, and AI datacenter demand accelerating, with energy-security premium amplified by the Hormuz blockade. It has NOT run (CCJX +3.2%, NLRX +2.8%) unlike crypto.",
+      "blocker": "CCJX_USDT, NLRX_USDT and SMRX_USDT are all enable=false on Pionex. 71 of 406 symbols are disabled; the entire uranium complex is among them.",
+      "handoff": "Requires a different venue for Erik to act on. Not executable here at any size."
+    }
+  ]
+}
