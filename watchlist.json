@@ -85,7 +85,8 @@
         "MSTRX",
         "HOODX"
       ],
-      "watch_for": "SEC/CFTC rulemaking, stablecoin legislation, ETF flows, Treasury liquidity operations, exchange incidents, funding and liquidation cascades"
+      "watch_for": "SEC/CFTC rulemaking, stablecoin legislation, ETF flows, Treasury liquidity operations, exchange incidents, funding and liquidation cascades",
+      "note": "RANKED #1 ON THESIS AND PASSED ON ENTRY, run 6 (2026-08-20). BTC 72,626.61 (+5.13%, highest since 1 June, +12-14% in two days), ETH 2,315.90 (+2.58%), CRCLX 83.75 (+4.58%) - the ONLY bid asset on a day every other risk asset fell. Drivers are the same fiscal story the metals book already owns, plus a White House meeting with crypto executives. Rejected because the move IS a record 2.7bn USD short squeeze (largest liquidation event since records began 2021, so the marginal buyer is buying forced covering) running into a binary CLARITY cloture vote on 15 Sept. THE STANDING QUESTION FOR THE NEXT RUN: gold was flat while crypto took the entire debasement move. If the next long-end shock again leaves gold flat while crypto runs, the book owns the right thesis in the wrong vehicle - that is a reallocation decision, not a falsifier. A pullback that unwinds the squeeze without breaking the fiscal story is the entry to want."
     },
     "energy_infra_nuclear": {
       "spot": [
@@ -126,7 +127,7 @@
         "EWYX",
         "GSGX"
       ],
-      "note": "COMPLACENCY FLAG, 2026-08-20: SPYX -0.56% and QQQX -0.56% on a day with ~82% odds of a September Fed hike priced, an active Middle East war, oil +23% in a month and the 30y at 2007 highs. The short view is defensible; taking it is NOT, on a book with no stop order type that goes unattended between runs. If ever taken, size so liquidation is unreachable rather than sizing to conviction. XLPX (staples 85.21) and XLVX (healthcare 174.06) are the unleveraged defensive expression of the same view."
+      "note": "RUN-5 FLAG RESOLVED, run 6 (2026-08-20 21:12Z). Run 5 recorded rebounding yields as the first soft evidence against the metals thesis. It is the reverse: the 30y rose 5.7bp to 5.251% ON 20 AUG, fully retracing the drop that followed the Treasury's buyback announcement. Official support for the long end failing within 24 hours is fiscal dominance being demonstrated, not refuted, and SPYX/QQQX fell precisely because of it (SPYX 763.23 -0.76%, QQQX 711.47 -0.83%; Dow -1.32%, S&P -0.87%, Nasdaq -1.00%). The COMPLACENCY FLAG from run 3 is now stale on its numbers - September hike odds are ~31%, not ~82% - but its OPERATING RULE stands and is general: this book has no stop order type and goes unattended between runs, so any short is sized so liquidation is unreachable, never sized to conviction. XLPX (staples) and XLVX (healthcare) remain the unleveraged defensive expression."
     },
     "metals_hard_assets": {
       "spot": [
@@ -178,5 +179,14 @@
     "cli_exit_code_lies": "pionex-trade-cli returns shell exit code 0 even when the API call FAILED (orders cancel returned exit 0 with result:false, TRADE_OPERATION_DENIED). Parse result from the JSON body; never branch on the exit code.",
     "orders_cancel_denied": "orders cancel --order-id is denied on this account (TRADE_OPERATION_DENIED, repeatable). orders cancel_all --symbol works and releases frozen balance. cancel_all is the only working cancel path."
   },
-  "perp_risk_note": "Perps carry leverage, funding payments and liquidation risk. Spot cannot be liquidated; a perp can. No stop-loss order type exists on this venue, and the agent does not run between sessions — so an adverse move on a leveraged perp can liquidate unattended. Size perps for survival across an unwatched gap, not for the conviction of the idea."
+  "perp_risk_note": "Perps carry leverage, funding payments and liquidation risk. Spot cannot be liquidated; a perp can. No stop-loss order type exists on this venue, and the agent does not run between sessions — so an adverse move on a leveraged perp can liquidate unattended. Size perps for survival across an unwatched gap, not for the conviction of the idea.",
+  "forward_catalysts": {
+    "_note": "Dated events found during sweeps, newest verification wins. Check these FIRST next run: a catalyst that has already passed is either a result to trade or a thesis to retire. Verified 2026-08-20 (run 6).",
+    "2026-08-26": "NVDA earnings. The semis theme is a binary around this print; MRVL 27 Aug, AVGO 2 Sep follow. NVDAX_USDT is spot-enabled, so this is expressible without leverage — but it is an unwatchable binary between runs.",
+    "2026-09-09": "US Treasury long-end buyback programme BEGINS — $2bn to at least $4bn per operation, 10-20y and 20-30y sectors, running through 4 Nov. This is the executing leg of the PAXG/SLVX fiscal-dominance thesis. Falsifier 1 fires if it is cancelled, shrunk or under-executed.",
+    "2026-09-15": "CLARITY Act cloture vote in the Senate — needs 60 votes to overcome a filibuster. Already slipped once (failed to reach the floor before the August recess) over unresolved ethics, illicit-finance and stablecoin-yield disputes. BINARY for the whole crypto complex. Senate returns 14 Sept.",
+    "2026-09-16": "FOMC decision. Priced ~31% hike / ~65% hold as of 20 Aug, after July CPI 3.4% y/y (core 2.5%) and softer PPI. July meeting held 3.50-3.75% with three dissents for +25bp (Logan, Hammack, Kashkari). PAXG falsifier 4 tests here.",
+    "2026-09-24": "US-China summit in Washington — tariffs, critical minerals, Taiwan. The 125% reciprocal-tariff escalation was paused a further 90 days on 11 Aug and the trade truce expires in November.",
+    "2026-11-04": "Treasury buyback programme ends."
+  }
 }
