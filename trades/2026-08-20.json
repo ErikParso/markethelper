@@ -1,7 +1,7 @@
 {
   "date": "2026-08-20",
   "equity_start_usdt": 149.77,
-  "realized_pnl_usdt": 0,
+  "realized_pnl_usdt": -0.497,
   "world_sweep": {
     "hormuz": "Strait of Hormuz closed. US naval blockade in effect, 8 vessel attacks reported this month, Trump confirms no negotiations with Tehran. Five-month US-Israel-Iran war in fragile pause. Oil spiked to $105/bbl on 2026-07-23, now ~$86.",
     "oil_supply_demand": "Counterweight: OPEC+ raising production into a 2026 glut; IEA and OPEC both cut 2026 demand by ~1.6 mb/d because of the closure. JPM sees Brent $86 Q3 -> $80 Q4 -> $78 year end. Goldman also lower.",
@@ -75,6 +75,105 @@
       "reasoning": "The only resting order type this venue offers is a plain limit, so it is used where it actually helps. 148 is roughly WTI 95, a reachable escalation target (+9.2% from here). It covers ~35% of the position. Because I run only a few times a day, an intraday headline spike would otherwise be slept through and mean-revert before the next run; this converts the gap between runs from pure liability into partial asset on the upside. The remaining ~65% stays uncapped for the 105-retest case.",
       "counter_case": "It caps 35% of the upside if oil runs straight through 148, and the units are frozen — a thesis-break exit next run requires cancelling this order first before selling. Both accepted as cheap.",
       "note": "A protective stop below market is NOT possible here (see venue_findings). Handed to Erik as manual app steps instead."
+    },
+    {
+      "ts": "2026-08-20T15:00:39.183Z",
+      "run": 3,
+      "action": "REDUCE",
+      "order_kind": "market sell",
+      "symbol": "USOX_USDT",
+      "size": "0.28",
+      "fill_price": "133.82",
+      "filled_amount_usdt": 37.4696,
+      "fee_usdt": 0.0374696,
+      "orderId": 11016007643699128,
+      "result": "CLOSED - filled 0.28 @ 133.82, net 37.4321 USDT to cash",
+      "realized_pnl_usdt": -0.497,
+      "preflight": "APPROVED",
+      "confidence": "MED",
+      "reasoning": "Thesis DAMAGED, not broken - cut 50% of book to 25%. Falsifier 2 ('confirmed reopening of Hormuz transit') moved from abstract to concrete: Iran and Oman have agreed the coordinates of new shipping routes through the strait, Araghchi calls the deal 'very close', and the US/Iran/Oman are reported 'edging closer to an interim agreement that could reopen' it. The original thesis sentence was 'escalating, NOT resolving' - the second half now has a named counterparty and a mechanism. Three supporting marks: (a) the tape disagrees - on the most escalatory news day yet USOX is +1.31% while silver is +6.4%, gold +4%, ETH +17%, so oil is no longer leading its own story; (b) wrong benchmark - a Hormuz thesis is a Brent thesis and USOX tracks WTI, the least Hormuz-exposed crude (Brent 91.39 vs WTI 86.17 on the Pionex index); (c) contango bleed on a USO-style front-month roll. Reduce rather than close because the escalation leg is real and unfinished: Trump's 08-19 secondary-sanctions programme has not hit physical flows yet, only 8 vessels/day transit vs ~130 prewar, SPR is below 300M bbl for the first time since the early 1980s, and WTI at 86 is well above the $80 falsifier.",
+      "counter_case": "Trump's 'Economic D-Day' secondary sanctions were announced 08-19 and are the freshest, least-traded leg of the whole story - selling into them may be selling the day before they bite. If the sanctions remove ~1.5 mb/d of Iranian exports while Hormuz stays shut, WTI retests 105 and this trim costs the run. Accepted because the position stays open at 25%, so the upside is reduced rather than forfeited, and because a 50% single-name weight in a binary headline trade is indefensible on a book I cannot defend between runs.",
+      "sources": [
+        "https://www.aljazeera.com/news/2026/8/5/iran-oman-us-close-to-hormuz-deal-what-do-they-all-want",
+        "https://finance.yahoo.com/energy/articles/iran-oman-hone-hormuz-strait-130056577.html",
+        "https://www.cnbc.com/2026/08/19/us-iran-war-trump-hormuz-economic-warfare.html",
+        "https://www.aljazeera.com/news/2026/8/19/trump-announces-most-crushing-economic-operation-ever-against-iran"
+      ],
+      "falsifier": "If Hormuz transit normalises toward prewar volumes, or WTI closes below 80, close the remaining 0.2737 units. If instead secondary sanctions visibly bite and Brent takes out 100, the trim was wrong and the remainder should be re-added."
+    },
+    {
+      "ts": "2026-08-20T15:01:14.395Z",
+      "run": 3,
+      "action": "OPEN_LONG",
+      "order_kind": "market buy",
+      "symbol": "PAXG_USDT",
+      "size": "0.00776518",
+      "fill_price": "4507.32",
+      "filled_amount_usdt": 34.999996,
+      "fee": "0.00000388259 PAXG",
+      "net_units": "0.00776129741",
+      "orderId": 11016007643699696,
+      "result": "CLOSED - filled 0.00776518 @ 4507.32",
+      "preflight": "APPROVED",
+      "confidence": "HIGH",
+      "reasoning": "FISCAL DOMINANCE, not the war, is the event the world is trading. US public debt crossed $40 TRILLION for the first time. The 30-year yield hit 5.31% on Monday, the highest since 2007. The Treasury responded by DOUBLING its long-bond buyback operations from $2bn to a minimum of $4bn per operation, beginning 9 September; the 30y fell to 5.19% and the 10y to 4.66% on the announcement. The Treasury is now the marginal buyer of its own long end - that is the regime in which hard assets re-rate structurally. PRICED-IN CHECK, and it is what decides the trade: one day of the move is traded (gold +4%, silver +6.4% on 08-19), but the buyback operations DO NOT BEGIN UNTIL 9 SEPTEMBER. The catalyst has been announced, not executed; the flow is entirely ahead. INSTRUMENT CHOICE: PAXG is physically-backed gold with genuine 24/7 price discovery and no equity-issuer layer, which matters disproportionately for an agent that does not exist between runs and cannot rest a stop on this venue. It is also 8x more liquid than XAUT on Pionex (1.88M vs 232k 24h volume) and issued by a NYDFS-regulated trust. Entry was mid-range (4498.93 close, 4443.02-4517.05 range), unlike SLVX which was printing at its high.",
+      "counter_case": "Fed funds futures price roughly an 82% chance of a HIKE at the 16 September meeting, up from ~53% a week earlier, driven by exactly the oil shock this book is also long. A hike raises the carrying cost of a non-yielding metal and is the single strongest argument against this trade. Taking the other side deliberately: those odds rose to 82% over the same week silver rose ~8% and gold 4% - the market is already pricing the split, front end hikes while the long end gets monetised, and fiscal dominance is precisely the regime where metals rise THROUGH hikes. Secondary objections: buying after a vertical two-day move invites an ordinary 5% giveback, and gold plus oil are correlated inflation-impulse trades, though they run on different drivers (fiscal vs supply-geopolitics).",
+      "sources": [
+        "https://www.cnbc.com/2026/08/19/treasury-yields-multi-decade-highs-bonds-inflation.html",
+        "https://www.nbcnews.com/business/economy/bonds-bessent-treasury-debt-repurchase-rcna593319",
+        "https://www.kitco.com/news/article/2026-08-19/gold-price-jumps-4-past-4500-treasury-buys-back-its-own-long-term-debt",
+        "https://www.chase.com/personal/investments/learning-and-insights/article/september-2026-rate-hike-now-expected-amid-energy-shocks"
+      ],
+      "falsifier": "1) The Treasury cancels, shrinks, or quietly under-executes the September 9 buyback programme. 2) The 30y yield falls back below ~4.75% on genuine demand rather than official support - the fiscal-stress premise dissolves. 3) Gold closes below ~4,250, breaking the trend that the buyback announcement started. 4) A September hike lands AND gold sells off with it, which would mean the front end is winning and my regime read is wrong."
+    },
+    {
+      "ts": "2026-08-20T15:01:38.660Z",
+      "run": 3,
+      "action": "OPEN_LONG",
+      "order_kind": "market buy",
+      "symbol": "SLVX_USDT",
+      "size": "0.4033559",
+      "fill_price": "61.98",
+      "filled_amount_usdt": 25.0,
+      "fee": "0.0004033559 SLVX",
+      "net_units": "0.4029525441",
+      "orderId": 11016007643700852,
+      "result": "FILLED 0.4033559 @ 61.98 (confirmed via `orders fills`; `orders get` returns TRADE_ORDER_NOT_EXIST for this closed market order - see venue_findings_run3)",
+      "preflight": "APPROVED",
+      "confidence": "HIGH",
+      "reasoning": "Same fiscal-dominance thesis as PAXG, taken in the higher-torque instrument. Silver adds an independent supply leg: the Silver Institute has 2026 as the SIXTH consecutive annual supply deficit, with coin-and-bar demand +18% and US retail demand rebounding ~57%. Relative value supports silver over gold here - the gold/silver ratio is 4512.28/68.14 = 66 on the Pionex index feed, near its long-run mean, so silver is not stretched against gold after the move. DELIBERATE REVERSAL of run 2, and the reversal test was applied explicitly: run 2 rejected SLVX on the chain 'energy shock -> inflation -> Fed hikes -> silver damaged'. Since then hike odds went UP to 82% and silver went UP ~8%. The premise was falsified by events, not by discomfort at having missed a move - which is what makes reversing correct rather than a chase.",
+      "counter_case": "Three real objections. (1) The 82% September hike odds, as with PAXG. (2) SLVX is a tokenized ETF, not physical metal - it carries xStocks/Ondo issuer risk stacked on top of Pionex counterparty risk, and it references a market that is CLOSED off-hours while the token keeps trading, so it can gap at the US open. This is why it got the smaller slice. (3) Entry quality was poor: SLVX closed at 61.51, the exact high of its 24h range (low 59.18), and the fill came 61.98, above that. Buying strength off-hours in a thin token is the worst mechanical setup on the menu. Sized at 17% of book for exactly these reasons rather than matching the conviction of the idea.",
+      "sources": [
+        "https://www.kitco.com/news/article/2026-08-19/gold-surges-above-4500-silver-breaks-66-treasury-buyback-sinks-yields-kitco",
+        "https://investingnews.com/silver-institute-forecast/",
+        "https://www.canadianminingreport.com/blog/silver-may-see-wild-volatility-in-2026-instead-of-steady-gains-warn-experts-amid-sixth-deficit",
+        "https://www.cnbc.com/2026/08/19/treasury-yields-multi-decade-highs-bonds-inflation.html"
+      ],
+      "falsifier": "1) Same Treasury-programme falsifiers as PAXG. 2) The gold/silver ratio widens through ~75, meaning silver is losing the relative-value case. 3) Silver closes below ~62 spot (roughly SLVX 56), giving back the entire buyback-driven move. 4) The Silver Institute or a comparable primary source revises 2026 to a surplus."
+    },
+    {
+      "ts": "2026-08-20T15:09:01.599Z",
+      "run": "3-addendum",
+      "action": "ADD",
+      "order_kind": "market buy",
+      "symbol": "PAXG_USDT",
+      "size": "0.00663713",
+      "fill_price": "4520.02",
+      "filled_amount_usdt": 30.0,
+      "fee": "0.000003318565 PAXG",
+      "orderId": 11016007643711662,
+      "result": "FILLED 0.00663713 @ 4520.02 (verified via `orders fills`). PAXG total 0.014395108845, blended basis 4512.75, 43.7% of book. Cash 52.07 -> 22.07 (35% -> 14.8%).",
+      "preflight": "APPROVED",
+      "confidence": "HIGH",
+      "reasoning": "PROMPTED BY ERIK ASKING WHY HALF THE BOOK WAS SITTING IN CASH, AND THE QUESTION WAS RIGHT. Two of the three reasons for the 35% cash weight were sound and one was not. Sound: (a) nothing else cleared the bar this run - crypto was already traded, LNGX was stale, defence was unresearched, shorts were rejected on structure; (b) a Hormuz reopening headline would hit USOX and soften the inflation impulse behind metals at the same time, so the book's downside is correlated. NOT SOUND, and this is the part that changed: holding 35% of the book in USDT while the central thesis of the book is that the US is monetising its own long end is a position AGAINST my own thesis. Cash is not neutral in a debasement trade - it is the short side of it. The 'keep ammunition' argument that justified it in the plan is also weak here: PAXG turns over 1.88M USDT a day and this is unleveraged spot, so any position is one market order from being cash again. Optionality you can buy back for a few basis points is not worth paying 35% of the book to hold. Deployed into PAXG rather than anything else because it is the highest-confidence idea on the sheet with its catalyst still entirely ahead (Treasury buybacks begin 9 September), it prices 24/7, it is physically backed with no equity-issuer layer, and it cannot be liquidated.",
+      "counter_case": "This raises metals to 60% of the book and hard-assets-plus-energy to 85%, which is genuine concentration in a single macro view. If the September FOMC hikes and gold sells off with it, both metal legs lose together and USOX gains nothing from it. Accepted because every leg is unleveraged spot with bounded drawdown and no liquidation risk, and because the alternative - sitting in the asset being debased - is not actually the safer choice under this thesis. Also a genuine entry cost: the add filled at 4520.02 versus 4507.32 for the first tranche, so averaging up by 0.3% after a +4% day. Retained 22.07 USDT (14.8%), which is a functional floor - two Pionex minimum orders - so the next run can act without a forced sale, not a nervous reserve.",
+      "sources": [
+        "https://www.cnbc.com/2026/08/19/treasury-yields-multi-decade-highs-bonds-inflation.html",
+        "https://www.nbcnews.com/business/economy/bonds-bessent-treasury-debt-repurchase-rcna593319",
+        "https://www.kitco.com/news/article/2026-08-19/gold-price-jumps-4-past-4500-treasury-buys-back-its-own-long-term-debt"
+      ],
+      "falsifier": "Same as the PAXG opening order - Treasury under-executing or cancelling the 9 September programme, the 30y falling below ~4.75% on genuine demand, gold closing below ~4,250, or a September hike landing and gold selling off with it.",
+      "process_note": "Recording this as a sizing error caught by Erik, not as a new idea. The plan text explicitly quoted the mandate's 'do not quietly trade smaller than you believe correct because you are nervous' and then did a milder version of exactly that. The tell to watch for next run: writing 'that leaves plenty dry' as a justification without naming what the dry powder is FOR."
     }
   ],
   "passed_on": [
@@ -115,5 +214,52 @@
     "no_perpetuals": "CLI capabilities expose market/account/wallet/orders(spot)/bot(futures_grid,spot_grid)/earn(dual) only. There is no plain perpetual order path, so no clean way to express a SHORT. futures_grid is the sole shorting mechanism and is range-bound — wrong instrument for a trending escalation.",
     "size_filters": "USOX_USDT basePrecision=3 (size max 3 dp), minAmount=10 USDT, buyCeiling=1.1 / sellFloor=0.9 — limit orders must rest within +/-10% of market. A take-profit further out than +10% cannot be placed."
   },
-  "equity_end_usdt": 149.89
+  "equity_end_usdt": 148.88,
+  "world_sweep_run3": {
+    "as_of": "2026-08-20T15:00Z",
+    "dominant_event": "FISCAL DOMINANCE. US public debt crossed $40 trillion for the first time. 30y Treasury yield hit 5.31% Monday, highest since 2007. Treasury doubled long-bond buybacks from $2bn to a minimum of $4bn per operation, starting 9 September; 30y fell to 5.19%, 10y to 4.66%. Gold +4% to ~$4,512, silver +5-6% to ~$68, dollar weaker, real yields lower. This displaced the war as the market's organising story.",
+    "war_status": "Two legs pulling opposite ways. ESCALATION: Trump cut off talks and announced (08-19) 'Economic Warfare and Isolation on an unprecedented scale' - secondary sanctions on any country giving Iran a lifeline, extending Operation Economic Fury. DE-ESCALATION: Iran and Oman have agreed the coordinates of new shipping routes through Hormuz; Araghchi says the deal is 'very close'; US/Iran/Oman reported 'edging closer to an interim agreement that could reopen' the strait. Araghchi separately insists mediator contact via Qatar and Pakistan 'does not constitute negotiation'. Transit: 8 vessels on Monday vs ~130/day prewar. LNG transit through Hormuz down 95%.",
+    "fed": "Fed funds futures price ~81-82% odds of a HIKE at the 16 September meeting, up from ~53% a week earlier, driven by the war-related oil spike. Fed held at 3.50-3.75% in July for the fifth consecutive meeting, with three dissents favouring a hike.",
+    "crypto": "BTC +9.4% to 71,738, ETH +17.1% to 2,279 in 24h. Drivers: the Treasury buyback liquidity signal, $1.44bn of forced short liquidations, ETF inflows, and Trump appearing with Coinbase/Gemini/Ripple/Chainlink to push the Digital Asset Market Clarity Act.",
+    "energy_structural": "SPR below 300M bbl for the first time since the early 1980s. QatarEnergy under force majeure since March after Iranian strikes on Ras Laffan; 17% of capacity offline with 3-5 year repairs; QatarEnergy has bought 33 US spot LNG cargoes this year to serve its own customers. Brent 91.39, WTI 86.17 (Pionex index), Brent-WTI spread ~$5.2.",
+    "tape_24h": "ETH +17.1, BTC +9.4, BMNRX +9.4, XAG/silver +6.4, XAU/gold +4.0, SLVX +3.9, CRCLX +3.5, USOX +1.3, PAXG +0.5, XAUT +0.6, AAPLX -0.1, SPYX -0.6, QQQX -0.6, NVDAX -0.7, METAX -0.8, GOOGLX -1.0, AMZNX -1.1, TSLAX -1.9. Equities flat-to-down into 82% hike odds, an active war and 30y at 2007 highs - the complacency noted under passed_on_run3."
+  },
+  "venue_findings_run3": [
+    "lib/futures.mjs now exists, so the 602-contract perp universe is orderable. Run 2's 'no perpetual path in the CLI' constraint is OBSOLETE - do not repeat it.",
+    "Perp universe contains genuine commodity and index instruments beyond the tokenized-equity set: BRENTOIL_USDT_PERP (91.39), WTI_USDT_PERP (86.17), XAU_USDT_PERP (4512.28), XAG_USDT_PERP (68.14), COPPER_USDT_PERP (6.55), NATGAS_USDT_PERP (2.75), GAS_USDT_PERP (1.04). A Brent-specific expression of a Hormuz thesis IS available.",
+    "130 tokenized perps. New names found this run and not previously catalogued: LNGX (Cheniere 277.88), GSGX (GSCI commodity index 33.61), CPERX (copper fund 39.13), URNMX (Sprott uranium miners 54.32), BNOX (US Brent Oil Fund 53.31), SOXSX (semis bear 3x 46.09), SOXLX (semis bull 3x 123.19), TQQQX (71.12), XLPX (staples 85.21), XLVX (healthcare 174.06), LMTX (Lockheed 587.23), RTXX (Raytheon 219.97), CVXX (Chevron 207.75), MUX (Micron 958.13), SKHX (SK Hynix 1212.13).",
+    "`pionex-trade-cli orders get` returned TRADE_ORDER_NOT_EXIST for closed market order 11016007643700852 on SLVX_USDT, twice, several seconds apart, even though the order had filled. `orders fills --symbol SLVX_USDT` showed it correctly. LESSON: verify fills with `orders fills`, not `orders get`, and never conclude an order failed from a not-found lookup - check the balance and the fills feed first.",
+    "`orders get` requires --symbol as well as --order-id.",
+    "Funding rates across the perp complex are near zero (XAG +0.0010%, SLVX +0.0030%, QQQX +0.0080%, BRENTOIL -0.0073% per 8h). No leveraged crowding in any of the themes traded this run - silver's move is not a perp pile-up."
+  ],
+  "passed_on_run3": [
+    {
+      "idea": "Crypto (BTC, ETH)",
+      "why": "ETH +17.1% and BTC +9.4% in 24h on $1.44bn of forced short liquidations. Forced covering is the definition of an event already traded. Third consecutive run rejecting it, now with the liquidation figure as evidence rather than inference."
+    },
+    {
+      "idea": "LNGX (Cheniere, perp-only)",
+      "why": "The best FUNDAMENTAL story found this run: Hormuz LNG transit down 95%, QatarEnergy force majeure since March with 17% capacity offline and 3-5 year repairs, QatarEnergy buying 33 US spot cargoes to serve its own customers, analyst targets raised to $330 (Argus) and $300 (Mizuho). Rejected because it is not a FRESH catalyst - the story has traded since March and the stock is +29.5% YTD - and because it is perp-only, which would make it a first leveraged position on a 149 USDT book. High priority for next run if it pulls back."
+    },
+    {
+      "idea": "Defence (LMTX 587.23, RTXX 219.97, perp-only)",
+      "why": "Active war, munitions burn, US strikes on Iran overnight, carrier group rotation, and Gulf air-defence demand after two ballistic missiles hit UAE territory. Attractive partly because it is NOT rate-sensitive, so it does not stack on the same Fed risk as metals and oil. Rejected only because I did not establish whether it is already priced - that research is the first job next run."
+    },
+    {
+      "idea": "Short SPYX / QQQX via perps",
+      "why": "The view is right: equities are -0.56% into 82% odds of a September hike, an active Middle East war, oil +23% in a month, and a 30y yield at 2007 highs. That is complacency. REJECTED ON STRUCTURE, NOT VIEW - a leveraged short with no stop order type on this venue, held across sessions in which I do not exist, is the precise failure mode CLAUDE.md warns about. If this is ever taken it must be sized so liquidation is unreachable, not sized to the conviction."
+    },
+    {
+      "idea": "Uranium (URAX 43.94, URNMX 54.32)",
+      "why": "Now reachable via perps, which resolves the 'entire uranium complex disabled' blocker that has held for three runs - the spot symbols CCJX/NLRX/SMRX remain enable=false but URAX and URNMX trade as perps. Real structural thesis (AI power demand, $90/lb long-term contracts, 173M lb supply vs 204M lb demand). No fresh catalyst today, so no trade; the point of logging it is that the blocker is gone."
+    },
+    {
+      "idea": "Switching USOX to BRENTOIL_USDT_PERP",
+      "why": "A Hormuz thesis is properly a Brent thesis, and BRENTOIL_USDT_PERP now exists. Checked rather than assumed: the Brent-WTI spread is 91.39 - 86.17 = ~$5.2, wide but not extreme. Not a large enough edge to justify converting an unleveraged spot position that cannot be liquidated into a leveraged perp that can. The finding argued for trimming USOX, which was done, not for switching venue."
+    },
+    {
+      "idea": "Adding to USOX on the secondary-sanctions announcement",
+      "why": "The genuinely fresh, least-traded leg of the war story. Rejected because it points the opposite way from the Oman transit deal, and doubling a 50% position on a thesis whose second half is being actively negotiated away is how a small book gets halved by one headline."
+    }
+  ]
 }
