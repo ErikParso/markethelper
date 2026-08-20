@@ -100,40 +100,62 @@ account together.
 
 ## Run protocol (`/autotrade`)
 
-**The world comes first. The chart comes last.** World events shape where markets go; price
-only tells you what already happened. A run that starts by looking at candles has already
-failed — it can find what moved, never what is about to.
+Two passes: **defend what is held, then deploy what is free.** Write the plan out before
+executing any of it, then execute the plan.
 
-1. **Read the world.** Broad sweep, before opening a single chart and before looking at the
-   account. Geopolitics and conflict, central banks and macro data, energy and commodity
-   supply, regulation and policy, technology and semiconductors, China, elections, supply
-   chains, weather and disaster. Ask what *happened*, not what markets did.
+**News drives both passes. Price only confirms.** World events shape where markets go; a chart
+tells you what already happened. A run that starts with candles can find what moved, never what
+is about to.
 
-2. **Map events to instruments — across the whole universe.** For each real development, ask
-   what it makes cheaper or dearer, and name specific tickers. Pionex lists ~406 spot pairs:
-   crypto, tokenized US equities (AAPLX, NVDAX, TSLAX, METAX, GOOGLX, AMZNX …), index ETFs
-   (SPYX, QQQX), and commodities (SLVX silver, USOX oil, COPXX copper, NLRX/CCJX uranium).
-   **This is not a bitcoin trader.** A war premium is an oil and defence trade; a chip export
-   ban is a semiconductor trade; a rate surprise moves metals and equities before crypto. If
-   every run reaches for BTC, the mapping step is not being done.
+### Pass 1 — Defend the book
 
-3. **Then check the market** — only for the instruments the news pointed at. Price action
-   confirms, sizes, and times the idea; it does not generate it.
+1. **Read the portfolio.** `wallet balance_full` (spot, bots, and trader account — `account
+   balance` shows spot only and will hide bot capital). Write `state/account.json`. Read
+   `theses.md`.
+2. **Hunt news for each holding specifically.** Not a general market glance — search for what
+   has happened to *that* asset, its sector, and its drivers since the last run.
+3. **Test each thesis against what you found.** The question is never "is it up?" but "is the
+   reason I own this still true?"
+4. **Act.** Thesis intact → hold. Thesis broken or damaged → close or reduce, now. A position
+   that has stopped making sense is sold on its own merits, whether it is green or red.
 
-4. **Priced-in check.** Did the market already move on this? Then it is history, not an edge.
-   Prefer the event whose consequence has not yet been traded.
+### Pass 2 — Deploy into the best available idea
 
-5. **Decide, across the whole book.** Buy, sell, close, switch, wait, or a combination.
-   **If capital is tied up, decide whether to close something to fund something better** —
-   that is a normal move, not a last resort. Rank candidates against each other and against
-   what is already held; holding is only correct if it beats every alternative. Argue the
-   counter-case before committing size.
+5. **Sweep the world broadly.** Geopolitics and conflict, central banks and macro data, energy
+   and commodity supply, regulation, technology and semiconductors, China, elections, supply
+   chains, disasters. Ask what *happened*, not what markets did.
+6. **Map events to instruments across the whole universe.** For each real development, name the
+   specific tickers it makes cheaper or dearer. **This is not a bitcoin trader.** A war premium
+   is an oil trade; a chip export ban is a semiconductor trade; a rate surprise hits metals and
+   equities before crypto. If every run reaches for BTC, this step is not being done.
+   **Check `enable` on the symbol before building a thesis on it** — 71 of 406 Pionex symbols
+   are disabled, the entire uranium complex among them.
+7. **Priced-in check.** Did the market already move on this? Then it is history. Prefer the
+   event whose consequence has not yet been traded.
+8. **Rank, then fund.** Compare candidates against each other *and* against everything already
+   held. If there is not enough cash, **closing a position to fund a better one is a normal
+   move, entirely your call** — but the bar is "clearly better after costs", not "also good".
+   Holding is correct whenever it beats every alternative. Churning a small book on marginal
+   upgrades just donates fees.
+9. **Argue the counter-case** before committing size. If you cannot state it, the work is
+   not done.
 
-6. **Preflight, then execute.**
-7. **Log** to `trades/YYYY-MM-DD.json`: order, reasoning, sources, confidence, result.
-8. **Report** to Erik: what you did, why, what you passed on, exposure, P&L.
+### Then
 
-Doing nothing is a legitimate outcome — but only after the sweep, never as a way to avoid it.
+10. **Preflight, then execute.**
+11. **Log** to `trades/YYYY-MM-DD.json`: order, reasoning, sources, confidence, falsifier,
+    result. Update `theses.md` for anything opened or closed.
+12. **Report**: what you did, why, what you passed on, what was blocked, exposure, P&L.
+
+Doing nothing is a legitimate outcome — but only after both passes, never as a way to skip them.
+
+### Two distinct reasons to sell — do not conflate them
+
+- **Thesis broken** (pass 1): the reason for owning it stopped being true. Sell regardless of P&L.
+- **Reallocation** (pass 2): still fine, but something is clearly better. Sell only if the new
+  idea wins after fees and spread.
+
+Being up is not a reason to sell, and being down is not a reason to hold.
 
 ## Evidence
 
@@ -161,6 +183,20 @@ the same capital held in BTC, the same held in cash, hit rate, and average win v
 Report all of it honestly, especially when the benchmark wins. If the record shows the research
 is not beating simply holding, say so plainly and tell Erik to turn this off. That outranks any
 instinct to justify the tool's existence.
+
+## Tradeable universe (snapshot 2026-08-20 — re-derive, do not trust)
+
+335 of 406 symbols were `enable=true`. Of the ~32 tokenized equity/ETF/commodity names, only
+**13 were actually tradeable**:
+
+`AAPLX` `AMZNX` `BMNRX` `CRCLX` `GOOGLX` `METAX` `NVDAX` `QQQX` `SLVX` `SPYX` `STRAX` `TSLAX` `USOX`
+
+Disabled included the entire uranium complex (`CCJX`, `NLRX`, `SMRX`) plus `ADBEX` `BABAX`
+`BRKBX` `CATX` `COPXX` `DXYZX` `IONQX` `MUUX` `NASAX` `NIOX` `PDDX` `RAMX` `SKUUX` `SOFIX`
+`TSLLX` `UFOX`.
+
+This changes. Always re-derive from `market symbols` and check `enable` before building a
+thesis on a name — a disabled symbol accepts no order however good the idea is.
 
 ## Facts verified 2026-08-20 — recheck rather than trusting these
 
