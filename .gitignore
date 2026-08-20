@@ -1,6 +1,19 @@
-.env
-.env.local
 node_modules/
 graphify-out/
-state/
+
+# Secrets
+.env
+.env.local
+
+# Kill switch — local operator state, never shared
 HALT
+
+# Live account state (balances, holdings)
+state/
+
+# Personal trading record — positions, sizes, PnL. Private to the operator;
+# the READMEs stay tracked because they document the format a cloner needs.
+theses.md
+trades/*.json
+decisions/*.md
+!decisions/README.md
