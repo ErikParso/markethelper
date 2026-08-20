@@ -45,6 +45,22 @@ node lib/preflight.mjs '{"action":"OPEN_LONG","symbol":"BTC_USDT","notional_usdt
 Execute only on exit 0. Never edit `policy.json` to change your own authority — Erik owns that
 file. If a check blocks you and you think it is wrong, report it; do not route around it.
 
+## When the API can't do it, hand Erik the steps
+
+Some things Pionex allows in its app are not exposed to the API. **Futures Lite bots are the
+known case** — not in `/api/v1/bot/orders` (`futures_grid`, `spot_grid`, `smart_copy` only),
+not closable, not readable beyond a total value in `wallet balance_full`.
+
+A tool gap is not a stopping point. Do every part you can, then hand over the rest as exact
+manual steps in the same message:
+
+- what to open, where to click, which values to enter
+- what the screen should say when it worked
+- what you will do once it is done
+
+Then continue with whatever else is doable. Never report a wall and wait — and never ask
+permission to give instructions. State the gap in one line and move straight to the steps.
+
 ## Kill switch
 
 A file named `HALT` in the repo root blocks every order, checked before anything else and armed
