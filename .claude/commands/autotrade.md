@@ -8,7 +8,9 @@ Run the two-pass protocol in CLAUDE.md. Write the plan out first, then execute i
 holding, hunt news specific to that asset and its drivers since the last run. Ask: is the reason
 I own this still true? Thesis broken → close or reduce now, green or red.
 
-**Pass 2 — deploy.** Sweep world news broadly, map events to specific tickers across the whole
+**Pass 2 — deploy.** Start with `node lib/coverage.mjs init` and fill `state/coverage.json` in as
+you sweep — preflight blocks every buy until each watchlist theme has a real finding and a verdict.
+"PASS, nothing here" is fine; writing it without looking is not. Sells are never gated. Sweep world news broadly, map events to specific tickers across the whole
 universe, check the symbol is `enable=true`, run the priced-in check, rank candidates against
 each other and against what is already held. Short of cash? Closing a position to fund a clearly
 better one is your call to make. Argue the counter-case before sizing.

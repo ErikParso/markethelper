@@ -121,6 +121,16 @@ is about to.
 
 ### Pass 2 — Deploy into the best available idea
 
+**Before any buy: `node lib/coverage.mjs init`, then fill it in as you sweep.** Preflight rejects
+every `OPEN_LONG`/`OPEN_SHORT`/`ADD` until `state/coverage.json` has a real finding and a verdict
+for every watchlist theme, plus the wide sweep. `PASS` — "looked, nothing worth trading" — is a
+perfectly good verdict; it just has to be written *after* looking. `CLOSE` and `REDUCE` are never
+gated: defending the book does not wait on paperwork.
+
+This exists because run 4 (2026-08-20) researched a live semiconductor thread, dropped it without
+ranking it, and reached 86% single-thesis concentration having never compared it to the
+alternatives it had already found. The protocol was advisory and got skimmed. Now it is checked.
+
 5. **Sweep the world — watchlist first, then wide.** `watchlist.json` names the themes and
    tickers to cover every run: AI/big tech, space and future tech, crypto/fintech,
    energy/infrastructure, index and metal anchors. Hunt news against those *first* so coverage

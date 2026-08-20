@@ -8,7 +8,7 @@
     "Verify availability before trading: spot via `market symbols` + enable flag, perps via /api/v1/market/indexes.",
     "Perp orders go through lib/futures.mjs — pionex-trade-cli has no perp path at all."
   ],
-  "verified_on": "2026-08-20 (run 3)",
+  "verified_on": "2026-08-20 (run 4)",
   "universe_size": {
     "spot_symbols": 406,
     "perp_contracts": 602,
@@ -171,7 +171,12 @@
     "spot_vs_perp": "A name absent from `market symbols` is not absent from Pionex. Check the perp universe before concluding anything is untradeable.",
     "SLVX_vs_PAXG": "Both are 'the metals trade' but they fail differently. PAXG is physically-backed gold with genuine 24/7 price discovery and one counterparty (Paxos, NYDFS trust). SLVX is a tokenized ETF - issuer risk (xStocks/Ondo) STACKED on Pionex risk, referencing a market that is closed off-hours while the token keeps trading, so it can gap at the US open. Do not treat them as interchangeable when sizing; the one that prices continuously deserves the larger slice.",
     "orders_get_false_negative": "`pionex-trade-cli orders get --symbol X --order-id N` returned TRADE_ORDER_NOT_EXIST twice for a SLVX_USDT market order that HAD filled (run 3, 2026-08-20). Verify fills with `orders fills --symbol X` and the wallet balance. NEVER conclude an order failed from a not-found lookup - re-sending would have doubled the position.",
-    "spot_disabled_is_not_untradeable": "'enable=false on spot' has been read as 'untradeable' for three runs and it is wrong. The whole uranium complex was written off that way; URAX and URNMX trade fine as perps. Always check /api/v1/market/indexes before recording a name as unavailable."
+    "spot_disabled_is_not_untradeable": "'enable=false on spot' has been read as 'untradeable' for three runs and it is wrong. The whole uranium complex was written off that way; URAX and URNMX trade fine as perps. Always check /api/v1/market/indexes before recording a name as unavailable.",
+    "usox_wti_vs_brent_benchmark": "USOX tracks WTI. Any Strait-of-Hormuz or Middle-East-supply thesis is a BRENT thesis - the risk premium accrues to Brent. The spread went 5.20 (run 3) to 6.90 (run 4, Brent 93.20 vs WTI 86.30) while the position was held, i.e. the wrapper leaked the entire edge. Closed at run 4. If an oil thesis returns, price BRENTOIL_USDT_PERP (index 91.62) against USOX before choosing, and remember the perp adds liquidation risk to an unwatched book.",
+    "oil_priced_in_lesson": "Hormuz has been effectively CLOSED since early March 2026 and WTI still fell ~18% from its 23 July peak of 105 to 86.30. A supply disruption that persists is not a supply disruption that keeps repricing - the market adapts and starts pricing resolution. Trumps 19 Aug Economic D-Day announcement moved WTI only +2.26% and USOX +0.75%. Test how the LAST escalation headline was absorbed before buying the next one.",
+    "stale_probability_numbers": "Run 3 recorded ~82% odds of a September Fed hike and sized two positions down for it. 82.4% was a late-July PEAK, already three weeks stale - actual odds were ~25-31%. Fed-funds probabilities move violently on single prints (July payrolls -23k, July CPI 3.4%/core 2.5%). NEVER carry a probability across runs. Refetch it, with a date.",
+    "cli_exit_code_lies": "pionex-trade-cli returns shell exit code 0 even when the API call FAILED (orders cancel returned exit 0 with result:false, TRADE_OPERATION_DENIED). Parse result from the JSON body; never branch on the exit code.",
+    "orders_cancel_denied": "orders cancel --order-id is denied on this account (TRADE_OPERATION_DENIED, repeatable). orders cancel_all --symbol works and releases frozen balance. cancel_all is the only working cancel path."
   },
   "perp_risk_note": "Perps carry leverage, funding payments and liquidation risk. Spot cannot be liquidated; a perp can. No stop-loss order type exists on this venue, and the agent does not run between sessions — so an adverse move on a leveraged perp can liquidate unattended. Size perps for survival across an unwatched gap, not for the conviction of the idea."
 }

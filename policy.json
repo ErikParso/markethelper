@@ -45,6 +45,12 @@
     "min_to_close": null
   },
 
+  "research": {
+    "_note": "NOT a discretionary risk limit — a completeness check on the pass-2 sweep. Set require_coverage_for_opens to false to disable it entirely. Erik owns this switch; the trader must not flip it. Added after run 4 (2026-08-20) skipped the wide sweep and concentrated 86% of equity in one thesis without ranking it against alternatives it had already researched. Gates OPEN_LONG/OPEN_SHORT/ADD only — CLOSE and REDUCE are never blocked, because defending the book must not wait on paperwork.",
+    "require_coverage_for_opens": true,
+    "coverage_max_age_min": 90
+  },
+
   "cooldowns": {
     "min_minutes_between_orders_same_symbol": 0,
     "no_trade_within_minutes_of_scheduled_catalyst": 0
