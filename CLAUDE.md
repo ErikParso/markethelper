@@ -142,6 +142,26 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
    Pionex symbol may be bought whether or not it is listed there. When a broad sweep turns up a
    name that survives a thesis, **append it to `watchlist.json` in the same run** — that file is
    meant to grow. Check `traps` in it before building a thesis on a lookalike ticker.
+
+   **Minimum sweep depth — set by Erik on 2026-08-21, and not optional:**
+
+   - **Price-scan EVERY watchlist symbol, every run.** All of them — ~79 tickers across spot and
+     perps, not the 20 already on your mind. These are API calls, not searches: batch them, they
+     are cheap. A name you have stopped thinking about can move 10% and you will never see it
+     unless you look. This is a *completeness check*, not idea generation — news still leads.
+   - **Then search on every mover you cannot explain.** An unexplained move is a hole in your
+     reading, not a curiosity. Price does not generate the thesis; it reveals what the news sweep
+     missed.
+   - **Broad news is many searches, not one.** One query per theme returns one digest of one
+     writer's framing and is not a sweep. Vary the wording — "why is X up" and "X regulation news
+     this week" surface different articles.
+   - **Anything you are about to BUY gets at least two differently-worded searches, and a primary
+     source where one exists** — SEC, Fed, Treasury, CFTC, company IR — not a press summary of it.
+
+   Why: run 8 (2026-08-21) bought BTC after **two** searches, on a leg described from a press
+   digest; the SEC primary source read at run 9 showed the digest had overstated it. Runs 6–9
+   averaged one search per theme, so 30 semiconductor names were "covered" by a single summary.
+   Erik: *"in phase 2 you have to read broad news and focus minimally on each symbol."*
 6. **Map events to instruments across the whole universe.** For each real development, name the
    specific tickers it makes cheaper or dearer. **This is not a bitcoin trader.** A war premium
    is an oil trade; a chip export ban is a semiconductor trade; a rate surprise hits metals and
