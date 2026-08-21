@@ -193,10 +193,62 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
 
 10. **Preflight, then execute.**
 11. **Log** to `trades/YYYY-MM-DD.json`: order, reasoning, sources, confidence, falsifier,
-    result. Update `theses.md` for anything opened or closed.
-12. **Report**: what you did, why, what you passed on, what was blocked, exposure, P&L.
+    result. Update `theses.md` for anything opened or closed. Record the run's outcome as
+    `runN_decision.action`, starting with the literal word `TRADED` if any order was placed —
+    `runcheck` reads that field to measure the no-trade streak.
+12. **Run BOTH gates and fix what they report before reporting to Erik:**
+    ```bash
+    node lib/runcheck.mjs        # audits the DECISION (do-nothing failure modes)
+    node lib/protocol-audit.mjs  # audits YOU, against the exchange and the receipts
+    ```
+13. **Report**: what you did, why, what you passed on, what was blocked, exposure, P&L.
+    **Include the benchmark line from `node lib/score.mjs` every single time**, winning or losing.
 
 Doing nothing is a legitimate outcome — but only after both passes, never as a way to skip them.
+
+### The do-nothing failure mode — `lib/runcheck.mjs`
+
+`coverage.mjs` stops the run-4 failure: deploying without sweeping. It cannot stop the opposite
+one, because **it is only consulted by preflight, and a run that places no order never calls
+preflight.** A do-nothing run used to be completely unaudited.
+
+Runs 6, 7, 9 and 10 traded nothing. Run 10 returned `PASS` on 8 of 8 themes, and Erik had to catch
+it by hand: *"again no trades in fifth run in row ?? it looks like its broken."* He was right, and
+the defect was a **closed loop** — the semiconductor short was rejected as *"the same view the book
+already holds"* (too correlated) while TSLAX was rejected as *"a hedge against my own thesis"* (too
+anticorrelated). Those two tests are jointly exhaustive: together they reject every asset that
+exists. Each rejection carried a real argument, so the ratchet was invisible from inside any single
+decision — only the pattern across runs exposed it.
+
+`runcheck` exits non-zero on four structural defects, and `lib/runcheck.test.mjs` includes a
+regression asserting run 10's original state fails it:
+
+- **Closed loop** — correlation *and* anticorrelation both used as vetoes in the same sweep.
+- **Unquantified "priced in"** — the claim needs a number. Say *"X trades at A against a credible
+  independent estimate of B"*, the way the oil rejection did (Brent 92.68 vs the EIA's own $85), or
+  drop it. Unquantified, it rejects everything that moved *and* everything that didn't.
+- **Unfalsifiable hold** — once a no-trade streak is running, name in `what_would_have_flipped_it`
+  the specific checkable fact that would have produced a trade, and rank the candidates against
+  **each other** in `ranked_candidates` before sending the winner against the book. Comparing each
+  candidate to the incumbent one at a time lets the incumbent win N separate duels.
+- **Cash trap** — cash below one venue minimum means the *next* run cannot buy without first
+  selling, and selling requires beating an incumbent. That is a closed system; runs 9 and 10 both
+  noticed it and reasoned it away. Fix it or declare it deliberate.
+
+**Three standing rules that follow, and they override the instinct that produced the loop:**
+
+1. **Correlation is a sizing input, never a veto.** If an idea beats a position the book holds, the
+   answer is to **swap** — fund it by cutting the correlated leg. "I already own this view" is a
+   reason to size it small, never to decline it.
+2. **Anticorrelation is not a defect.** A position that pays when the book's thesis is wrong is a
+   *hedge*. A book 86% in one thesis facing a dated unhedgeable event is exactly the book that
+   should want one.
+3. **Never trade to satisfy a complaint.** This is the paired risk and it is worse than paralysis,
+   because it is paralysis plus fees. Test any trade that follows a challenge: *would this same
+   evidence have moved me unprompted?* Run 10's SLVX trim passed that test — the evidence
+   contradicted a specific written claim the hold rested on (that Jackson Hole was symmetric, which
+   `watchlist.json` had explicitly said to verify and neither run 7 nor run 10 did). **If the answer
+   is ever no, do not trade. Say so, and explain why the challenge does not change the case.**
 
 ### Two distinct reasons to sell — do not conflate them
 
@@ -226,12 +278,49 @@ that file knows why. Write the thesis when you open, and check it against realit
 
 ## Scoring
 
-`/autotrade --score` re-reads `trades/` older than 30 days and reports: account equity change,
-the same capital held in BTC, the same held in cash, hit rate, and average win vs average loss.
+**`node lib/score.mjs` — every run, from inception, no minimum age.** Reports account equity
+change against the same capital simply held in BTC and held in cash.
+
+**⚠ This was broken until 2026-08-21 and the breakage cost real money.** The rule used to read
+"`/autotrade --score` re-reads `trades/` **older than 30 days**". The book opened 2026-08-20, so
+the scorer could not execute even once — and nobody noticed that through run 10 the book was
+**+0.99% while simply holding BTC was +7.59%**. A 6.6-point gap, invisible for ten runs, because
+the only instrument that measured it was gated behind a date that had not arrived. **A benchmark
+you cannot run is not a benchmark.** `lib/protocol-audit.mjs` now REQUIRES a written
+`benchmark_response` in `state/coverage.json` whenever the gap is worse than −2 points.
+
+The gap is diagnostic, not automatically disqualifying — a diversified book losing to BTC in a
+crypto bull leg is expected. The question is whether it has been **noticed and answered**.
 
 Report all of it honestly, especially when the benchmark wins. If the record shows the research
 is not beating simply holding, say so plainly and tell Erik to turn this off. That outranks any
 instinct to justify the tool's existence.
+
+## Gates — what each one actually checks, and why it exists
+
+Every gate below was added after a specific, identified failure. None is theoretical.
+
+| Gate | Trusts | Catches |
+|---|---|---|
+| `lib/preflight.mjs` | `policy.json`, `HALT` | Ungated orders. Writes a **receipt** to `state/preflight-log.jsonl` at approval time. |
+| `lib/coverage.mjs` | the trader's own writing | Deploying capital without sweeping (run 4). |
+| `lib/runcheck.mjs` | the trader's own writing | Do-nothing failure modes: the closed loop, unquantified "priced in", unfalsifiable holds, the cash trap (runs 6–10). |
+| `lib/score.mjs` | the exchange | Benchmark gap vs holding BTC or cash. |
+| `lib/tests-ledger.mjs` | `state/registered-tests.json` | A test that fired and was ignored (the run-6 vehicle test, read past by four runs). |
+| `lib/protocol-audit.mjs` | **the exchange + preflight receipts** | **The trader itself.** |
+
+**`protocol-audit.mjs` is the only one that does not take the trader's word for anything.**
+Erik, 2026-08-21: *"i think you do whatever you want, and ignore instructions. we should build more
+gates that validate if you really do everything as i described."* He was right — every other check
+reads files the trader authored, so a run that skipped a step and wrote a plausible paragraph
+passed all of them. This one reconciles against things the trader cannot write: real fills from the
+venue, and receipts preflight emitted itself. It catches an order that bypassed the gate, an order
+never logged, a position held with no thesis, stale state, findings with no source, an unanswered
+benchmark gap, and an ignored registered test.
+
+**Tests: `node lib/runcheck.test.mjs` and `node lib/protocol-audit.test.mjs`.** Each contains
+regressions built from failures that actually happened. If one goes red, the trader has resumed a
+habit it was already caught doing — fix the behaviour, not the test.
 
 ## Two separate universes: spot and perps
 
