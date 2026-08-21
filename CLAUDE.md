@@ -150,11 +150,22 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
    are disabled, the entire uranium complex among them.
 7. **Priced-in check.** Did the market already move on this? Then it is history. Prefer the
    event whose consequence has not yet been traded.
-8. **Rank, then fund.** Compare candidates against each other *and* against everything already
-   held. If there is not enough cash, **closing a position to fund a better one is a normal
-   move, entirely your call** — but the bar is "clearly better after costs", not "also good".
-   Holding is correct whenever it beats every alternative. Churning a small book on marginal
-   upgrades just donates fees.
+8. **Rank, then fund. Every run scores three funding routes, in writing:** buy with free cash,
+   **sell or trim a holding to fund the better idea**, and hold. The sell-to-fund line goes in
+   the record *even when the answer is no* — skipping it is not allowed, and "there wasn't
+   enough cash" is **never** a reason a candidate loses. Cash is not the constraint; the book is.
+
+   **Being fully invested must never become the reason nothing changes.** Set by Erik on
+   2026-08-21, after run 7 ranked "deploy the free cash" and "trim for event risk" but never
+   priced selling PAXG or SLVX to fund the top-ranked candidate — he had to ask for it. A book
+   that is 100% deployed still has to compete for every position it holds, every run. Freezing
+   on the current three names because the money is already in them is the failure mode this
+   step exists to prevent.
+
+   Compare candidates against each other *and* against everything already held. The bar for a
+   swap stays "clearly better after costs" — fees and spread on both legs — not "also good".
+   Holding is correct whenever it genuinely beats every alternative, and churning a small book
+   on marginal upgrades just donates fees. But that verdict has to be *reached*, not assumed.
 9. **Argue the counter-case** before committing size. If you cannot state it, the work is
    not done.
 
