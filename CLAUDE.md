@@ -203,8 +203,57 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
     ```
 13. **Report**: what you did, why, what you passed on, what was blocked, exposure, P&L.
     **Include the benchmark line from `node lib/score.mjs` every single time**, winning or losing.
+14. **Book the next run** (see Self-scheduling below). A run that does not do this ends the loop.
 
 Doing nothing is a legitimate outcome — but only after both passes, never as a way to skip them.
+
+### Self-scheduling — the loop decides its own cadence
+
+**Set by Erik on 2026-08-25: *"every 2 hours is burning tokens... lets agent decide and schedule
+when following loop will execute."*** The fixed 2-hour cron is gone. Twelve runs a day mostly
+re-read a market that had not moved — run 32 fired **18 minutes** after run 31 and nothing in the
+book had shifted more than 0.3%. Each run now books its own successor.
+
+```bash
+node lib/cadence.mjs '{"next_event_utc":"2026-08-26T12:30:00Z","next_event":"core PCE"}'
+```
+
+It prints a fire time and a ready-made 5-field cron string. Pass that to **`CronCreate` with
+`recurring: false`** — a chain of one-shots, not a timer.
+
+**The split is deliberate. Judgement is yours, arithmetic is the script's.** You supply what the
+sweep found — the next dated event, whether a rung filled, whether a thesis broke. It computes how
+far the nearest resting bid sits from the market, applies the night guard and the clamps, and
+picks an off-minute. Cadence therefore cannot drift into "whatever felt right", and the reasoning
+is reproducible from the inputs.
+
+What it does, so you can argue with it rather than obey it:
+
+| Situation | Next run |
+|---|---|
+| A resting order **filled**, or a **thesis broke** | **1h** — and it overrides the night guard |
+| A dated event lands before the computed time | **20 min after the event** |
+| Nearest rung **<1%** below market | 4h |
+| Nearest rung **1–2.5%** | 6h |
+| Nearest rung **>2.5%** | 9h |
+| **No resting orders at all** | 5h — an idle book is itself the problem |
+| Would land 23:00–06:00 local, nothing dated | pushed to **06:50 local** |
+| Any result | clamped to **1h–12h** |
+
+**Inputs are optional and all of them are yours to set:** `next_event_utc`, `next_event`,
+`rung_filled`, `thesis_broken`, `force_hours`. Use `force_hours` when you genuinely disagree with
+the table — and say why in the run log, because an unexplained override is how a rule rots.
+
+**Two things that follow, and they are not optional:**
+
+1. **Book the successor even on a bad run.** Degraded run with no web search, everything blocked,
+   nothing to trade — still schedule. The chain is the loop; a link that does not fire ends it.
+2. **Never step over a dated event.** If the table says 9h and core PCE lands in 6h, the script
+   fires you 20 minutes after the print instead. Waking up to a catalyst already priced is the
+   late-entry defect wearing a clock.
+
+Cron jobs are **session-only** — they die when Erik closes the session, and there is no way to
+persist them. If the chain breaks, he restarts it by running `/autotrade` once by hand.
 
 ### The do-nothing failure mode — `lib/runcheck.mjs`
 

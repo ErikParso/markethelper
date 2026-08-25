@@ -30,3 +30,5 @@ Non-negotiable:
 - **Blocked by the API? Hand Erik exact manual steps in the same message and carry on with
   everything else.** Never stop and wait. Never ask permission to give instructions.
 - Log every order and update `theses.md`. Finish with a written report.
+- **SCHEDULE THE NEXT RUN YOURSELF — the loop no longer runs on a fixed timer.** See
+  "Self-scheduling" in CLAUDE.md. A run that does not book its successor ends the loop.
