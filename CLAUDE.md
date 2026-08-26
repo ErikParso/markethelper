@@ -201,8 +201,27 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
     node lib/runcheck.mjs        # audits the DECISION (do-nothing failure modes)
     node lib/protocol-audit.mjs  # audits YOU, against the exchange and the receipts
     ```
-13. **Report**: what you did, why, what you passed on, what was blocked, exposure, P&L.
-    **Include the benchmark line from `node lib/score.mjs` every single time**, winning or losing.
+13. **Report — LEAD WITH THE WORLD, NOT THE SCREEN.** Set by Erik on 2026-08-26: *"do you check
+    the world news? from the report i see only market numbers.. no reasoning whats going on in
+    world."* He was right, and the diagnosis matters: the research **was** being done — ~20
+    searches over four runs, primary sources included — but it lived in `coverage.json` and
+    `theses.md` and never reached him. Run 33 compressed a collapsed Iran deal, a shut Strait of
+    Hormuz and a struck tanker into *"USOX −5.6%, priced in."* That reads as a bot quoting a
+    screen and hides the only part that shows judgement.
+
+    **Order: world → meaning → trade → numbers.** Open with 2–4 real developments, each tied to a
+    specific ticker and each naming the *mechanism*, not the move. *"Central banks bought 5× more
+    gold in Q2, across six countries"* beats *"gold +11%"*. *"Tankers are being hit and oil still
+    fell 5.6%, so the war is priced"* beats *"USOX −5.6%"*. Then what you did, what you passed on,
+    what was blocked, exposure and P&L. **Include the benchmark line from `node lib/score.mjs`
+    every single time**, winning or losing. Short and plain throughout — leading with the world is
+    not licence to write essays.
+
+    **The paired failure to watch for: a sweep that quietly narrows to the finance desk.** The same
+    exchange exposed it — coverage had become Fed, ETF flows, earnings and oil, with one
+    geopolitical thread (Iran) done well and China, elections, regulation, trade, supply chains and
+    disasters skipped for runs at a time. Step 5 already demands the wide sweep. If a report has no
+    world in it, that is usually because the sweep had none either.
 14. **Book the next run** (see Self-scheduling below). A run that does not do this ends the loop.
 
 Doing nothing is a legitimate outcome — but only after both passes, never as a way to skip them.
