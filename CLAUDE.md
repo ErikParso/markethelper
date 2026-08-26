@@ -109,9 +109,11 @@ is about to.
 
 ### Pass 1 — Defend the book
 
-1. **Read the portfolio.** `wallet balance_full` (spot, bots, and trader account — `account
-   balance` shows spot only and will hide bot capital). Write `state/account.json`. Read
-   `theses.md`.
+1. **Read `state/next-run.md` FIRST, then the portfolio.** That file is the previous run's handoff:
+   what to check first, live falsifiers, dated catalysts, and movers left unscreened. It exists so
+   the cron prompt can stay one line — see "The cron prompt must be one line" below. Then
+   `wallet balance_full` (spot, bots, and trader account — `account balance` shows spot only and
+   will hide bot capital). Write `state/account.json`. Read `theses.md`.
 2. **Hunt news for each holding specifically.** Not a general market glance — search for what
    has happened to *that* asset, its sector, and its drivers since the last run.
 3. **Test each thesis against what you found.** The question is never "is it up?" but "is the
@@ -134,9 +136,21 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
 5. **Sweep the world — watchlist first, then wide.** `watchlist.json` names the themes and
    tickers to cover every run: AI/big tech, space and future tech, crypto/fintech,
    energy/infrastructure, index and metal anchors. Hunt news against those *first* so coverage
-   never silently narrows. **Then sweep broadly anyway** — geopolitics and conflict, central
-   banks and macro data, energy and commodity supply, regulation, semiconductors, China,
-   elections, supply chains, disasters. Ask what *happened*, not what markets did.
+   never silently narrows. **Then sweep broadly anyway, ACROSS DOMAINS — not down the finance
+   desk.** Several differently-worded queries each, and a sourced finding for every one:
+
+   - **China** — economy, tech policy, Taiwan, export controls, property, stimulus
+   - **Europe** — ECB, energy, elections, industrial policy, Ukraine
+   - **Trade and tariffs** — new measures, retaliation, supply chains, shipping and freight rates
+   - **Regulation** — crypto and stablecoin rulemaking, antitrust, AI rules
+   - **Elections and political risk**, anywhere it moves an asset
+   - **Disasters, weather, disease, strikes, infrastructure failures**
+   - Then the usual: **Iran/Hormuz, the Fed, energy, semiconductors**
+
+   Ask what *happened*, not what markets did. **When a domain genuinely yields no tradeable edge,
+   write that.** Run 34 found real crises in Sudan, Tunisia, Georgia and Peru and correctly recorded
+   that none mapped to an instrument on this venue — inventing a link is worse than reporting the
+   blank.
 
    **The watchlist is a floor on coverage, never a ceiling, and never a whitelist.** Any enabled
    Pionex symbol may be bought whether or not it is listed there. When a broad sweep turns up a
@@ -222,9 +236,32 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
     geopolitical thread (Iran) done well and China, elections, regulation, trade, supply chains and
     disasters skipped for runs at a time. Step 5 already demands the wide sweep. If a report has no
     world in it, that is usually because the sweep had none either.
-14. **Book the next run** (see Self-scheduling below). A run that does not do this ends the loop.
+14. **Rewrite `state/next-run.md`, then book the next run** (see Self-scheduling below). A run that
+    does not do both ends the loop, or ends it blind. The handoff file replaces everything that used
+    to be crammed into the cron prompt: first actions, each position's live falsifier, dated
+    catalysts, and any big mover you did NOT get to screen.
 
 Doing nothing is a legitimate outcome — but only after both passes, never as a way to skip them.
+
+### ⚠ BANNED FRAMING: "nothing happened that changes what I own"
+
+**Erik, 2026-08-26, on being told some runs would honestly end that way:** *"explained it multiple
+times, for fuck sake remeber that... you are alowed to sell what we own to buy something more
+relevant."* That was the **third** telling — after run 7's missed sell-to-fund line and *"Dont want
+you to freeze on 3 stocks just because all funds are there."*
+
+The sentence is banned because of its **frame**, not its wording. "Does news change what I own?"
+makes the book the default and asks only whether something **breaks** a position — so the incumbent
+wins by doing nothing, every time, forever. Each rejection looks reasonable in isolation; only the
+streak reveals the ratchet. That is exactly the closed loop `runcheck` was built for.
+
+**The frame that replaces it: every position has to win its place again, every run.** Ask *"what is
+the best thing to own right now?"* — fresh, against the whole exchange, not against a shortlist of
+things that might damage what is already held. **"Hold" is a comparison that was won, never a
+starting position**, and a run must be able to say which candidates it beat.
+
+Three tellings means this rule decays back into incumbent-favouring language on its own. Treat it as
+a live failure mode, not a settled matter.
 
 ### Self-scheduling — the loop decides its own cadence
 
@@ -239,6 +276,26 @@ node lib/cadence.mjs '{"next_event_utc":"2026-08-26T12:30:00Z","next_event":"cor
 
 It prints a fire time and a ready-made 5-field cron string. Pass that to **`CronCreate` with
 `recurring: false`** — a chain of one-shots, not a timer.
+
+#### ⚠ THE CRON PROMPT MUST BE ONE LINE. `state/next-run.md` carries the rest.
+
+**Erik, 2026-08-26:** *"when the run starts it shows a long rpompt in my claude window i cannot
+minimize and its covring whole screen cannot see the output."* Runs 30–34 stuffed thirty-plus lines
+of standing rules into the `CronCreate` prompt, and every one of them rendered into his terminal on
+fire, burying the output he actually wanted.
+
+**So the schedule prompt is exactly this, and nothing more:**
+
+```text
+/autotrade
+```
+
+Per-run handoff — what the last run learned, what to check first, live falsifiers, dated catalysts
+— goes in **`state/next-run.md`**, which the run **reads at step 1 and rewrites at step 14**. The
+standing rules were never supposed to be in the prompt: they live in this file and in
+`.claude/commands/autotrade.md`, and repeating them was duplication that could drift out of sync.
+
+If a run genuinely needs a one-off instruction in the prompt, keep it to a single short line.
 
 **The split is deliberate. Judgement is yours, arithmetic is the script's.** You supply what the
 sweep found — the next dated event, whether a rung filled, whether a thesis broke. It computes how
