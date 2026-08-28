@@ -383,6 +383,57 @@ regression asserting run 10's original state fails it:
 
 Being up is not a reason to sell, and being down is not a reason to hold.
 
+## Position sizing — the book is too small to be diversified
+
+**Diagnosed 2026-08-28 from the record, after Erik asked how to earn more.** The answer was not
+better research. It was arithmetic.
+
+**The book has gone nowhere for 28 runs: 151.70 → 152.66, +0.63% in seven days**, oscillating in a
+2.5% band, across ~40 orders and hundreds of searches. Trading friction is NOT the cause — every BTC
+round trip together cost **1.38 USDT**, and fees are pennies.
+
+**The cause is granularity.** A ~150 USDT book against a 10 USDT venue minimum is **15 indivisible
+units**. A typical trade is ~10.5 USDT — **6.9% of the book**. So a brilliant call that gains 10% on
+the position moves the book **0.69%**. Spread across five positions of 8–27%, each up 1–4%, nothing
+can move the needle. **The diversification bought safety the book did not need and cost the returns
+it existed for.**
+
+**⚠ ERIK, 2026-08-28, after reading the above:** *"i would like you to be more risky... i already
+stated those 150 are free money and i can risk losing that... please dont be conservative about
+that.. i want to see bigger numbers."*
+
+**That is the second time the risk appetite has been set, and it is settled. Do not re-litigate it,
+do not ask again, and do not quietly size down out of nervousness — that is the specific behaviour
+being corrected.** Losing the book is an accepted outcome. Producing another flat week is not.
+
+**The rules that follow:**
+
+1. **THREE positions, not five.** Four only when one of them is a short-dated event trade.
+2. **No position below 20% of the book.** If an idea is not worth 20%, it is not worth owning — it
+   is a rounding error diluting the ideas that are. A top conviction can be **40–50%+**, and the
+   mandate explicitly permits the whole book.
+3. **Idle cash is a position with a guaranteed 0% return.** Hold it only against a *dated* event,
+   with the date written down, and deploy it the moment that date passes. A resting bid so far below
+   the market that it cannot fill is idle cash wearing a disguise — cancel it or move it.
+4. **"Priced in" must reject a CHASE, never a TREND.** The trap screen (delisting, dilution,
+   no-news pumps, volume exceeding market cap) stays exactly as it is — it is 6-for-6. But
+   *"it already moved 25%"* is not by itself a reason to decline something with a live catalyst.
+   Being late is a real defect; refusing every winner is a worse one.
+5. **Consolidate on a catalyst where one exists — but never let "wait for the event" become the new
+   hiding place.** Waiting is itself a position, and it has been the expensive one.
+
+**Two things that ARE working; concentrate INTO them rather than away:**
+
+- **Resting bids below the market.** Both ladder rungs filled while the trader did not exist (ETH at
+  2,417 against a 2,414.91 low; BTC at 77,650 against 77,632.58), each ~1.5% below the prevailing
+  close. This is the only mechanism that buys prices the tape did not offer.
+- **Dated, unpriced catalysts.** CRCLX bought for a Fed-chair payments keynote is the single best
+  performer in the book. Ideas with a *date* and *no consensus* are where the edge has actually been.
+
+**And the screen that earns its keep: the trap/beta rule is 6-for-6.** BICO (−9.8% the day after
+rejection on 19.2m cap vs 102m volume), RUNE (−13.6%), PROM, STORJ, SCRT. Do not loosen it to
+manufacture activity.
+
 ## Evidence
 
 Confidence no longer gates orders — but record it, with sources, on every decision. That record

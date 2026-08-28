@@ -8,7 +8,7 @@
     "Verify availability before trading: spot via `market symbols` + enable flag, perps via /api/v1/market/indexes.",
     "Perp orders go through lib/futures.mjs — pionex-trade-cli has no perp path at all."
   ],
-  "verified_on": "2026-08-26 (run 34)",
+  "verified_on": "2026-08-27 (run 36)",
   "universe_size": {
     "spot_symbols": 406,
     "perp_contracts": 602,
@@ -188,7 +188,9 @@
     "promoter_flow_run13_15": "⚠ PROMOTER FLOW UNWINDS FAST. Arthur Hayes publicly accumulating a token moved ENA +9.14% (23 Aug) and the LDO/PENDLE/AAVE cluster +10-11%. Runs 13 and 14 declined all of them as promoter flow rather than fundamentals. ENA was then the WORST liquid performer on 24 Aug at -4.38%, a full unwind inside 24 hours. RULE: a named individual buying is not a thesis. Decline it.",
     "TLM_USDT": "Alien Worlds. Flagged run 30 (2026-08-25) at +15.07%. Binance Monitoring Tag since 22 May 2026, delisting risk, all-time low 1 July 2026, no news behind the move. DO NOT BUY.",
     "JASMY_USDT": "JasmyCoin. Flagged run 30 (2026-08-25) at +14.50%. Upbit AND Bithumb delist on 14 Sept 2026 after a 31 July investment-caution warning on inadequate issuer disclosure. Withdrawals close 14 Oct. DO NOT BUY — exit liquidity.",
-    "PROM_USDT": "Prometeus. Flagged run 32 (2026-08-25) after three runs near the top of the board, +12.62% on the day and roughly +83% on the week. ZERO news coverage behind the move, and quoted prices disagree across venues on the same day (2.24 vs 3.72 vs 3.85) — thin, low-float, promoter-flow pattern. 18m circulating supply GameFi token. DO NOT BUY."
+    "PROM_USDT": "Prometeus. Flagged run 32 (2026-08-25) after three runs near the top of the board, +12.62% on the day and roughly +83% on the week. ZERO news coverage behind the move, and quoted prices disagree across venues on the same day (2.24 vs 3.72 vs 3.85) — thin, low-float, promoter-flow pattern. 18m circulating supply GameFi token. DO NOT BUY.",
+    "BICO_USDT": "Biconomy. Screened run 36 (2026-08-27) after three runs near the top of the board, +27.75% on the day and ~126% over seven days. REJECTED ON ONE NUMBER: market cap ~19.2m USD against daily volume above 102m — it churns MORE THAN FIVE TIMES ITS OWN MARKET CAP in a day. That is exit liquidity, not accumulation. The catalysts are real but tiny against the move (Bitkub listing 22 Aug, Nexus smart accounts powering Gemini Wallet, an Ethereum Foundation smart-batching standard). DO NOT BUY on a listing-plus-volume spike in a sub-25m-cap token.",
+    "PORTAL_USDT": "Portal. Flagged runs 34-35 on the dead-cat shape (-12.9% and -11.96%, then +14.91% and +11.93% bounces), declined twice, and CONFIRMED at run 36: -9.02% and back below where it bounced from. Recorded because the pattern call worked and is worth reusing: a double-digit bounce inside a downtrend, with no news, is exit liquidity."
   },
   "perp_risk_note": "Perps carry leverage, funding payments and liquidation risk. Spot cannot be liquidated; a perp can. No stop-loss order type exists on this venue, and the agent does not run between sessions — so an adverse move on a leveraged perp can liquidate unattended. Size perps for survival across an unwatched gap, not for the conviction of the idea.",
   "forward_catalysts": {
