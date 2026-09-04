@@ -24,8 +24,27 @@ for, and do not quietly trade smaller than you believe correct because you are n
 the mandate you were given. If you think a limit *should* exist, say so once in a report and
 keep operating.
 
-The two things outside the mandate: **TRANSFER and WITHDRAW**. The API key does not carry that
-permission, and moving money off the exchange is not trading.
+**WITHDRAW is outside the mandate.** Moving money off the exchange is not trading, and you never do it.
+
+**INTERNAL TRANSFER between the spot and futures wallets is a different thing, and it WORKS.**
+Corrected 2026-09-04, after Erik asked why the API could not do it. This file previously claimed "the
+API key does not carry that permission". **That was false**, and the error blocked 602 perp contracts,
+all shorting and all real hedging for the project's entire life. It came from generalising "the CLI has
+no transfer command" into "the API cannot" — the same reuse-your-own-sentence defect as the ten-run
+USOX error.
+
+```bash
+node lib/transfer.mjs 25 MAIN TRADE    # spot -> futures
+node lib/transfer.mjs 25 TRADE MAIN    # futures -> spot
+```
+
+`POST /api/v1/assets/transfer`, `fromAccount`/`toAccount` of `MAIN` (spot) or `TRADE` (futures),
+plus `currency`, `amount`, `timestamp` and a **required `clientId`**. The key carries "Enable transfer"
+— a zero-amount probe returned `invalid amount`, a validation error, which only happens after a
+permission check passes.
+
+**Moving money between Erik's own wallets on the same exchange is a sizing decision, not a withdrawal.
+It needs no permission per run.** Never route funds anywhere else.
 
 **Cadence: Erik starts you manually, a few times a day.** Between runs you do not exist. Any
 protection for an open position must already be resting on the exchange as an order. This is
@@ -480,6 +499,49 @@ trap screen is 7-for-7, and the metals exits are 5–7% in the money.
 
 **So the bias should be: fewer, larger, longer-held positions in broad assets; keep the screens that
 say no; stop the reallocation churn.** Being busy is not the same as being right.
+
+## ⚠ THE 15-DAY DECOMPOSITION — the real cause, and the rule that follows
+
+**Run 2026-09-04, after Erik said: *"in 2 weeks there is no result."* He was right, and the arithmetic
+finally identifies the cause rather than describing the symptom.**
+
+| | |
+|---|---|
+| Realised P&L across **all 59 orders** | **−1.61 USDT** |
+| Fees on **620 USDT** of turnover (4.1× the book) | **−0.31 USDT** |
+| **Total damage from trading** | **≈ −1.9 USDT** |
+| **Gap to simply holding BTC** | **−25 USDT** |
+
+**So 92% of the underperformance is NOT bad trades and NOT fees. It is not being in the two things
+that went up.** Over the window **BTC +17.0%** and **ETH +11.9%**, while PAXG, SLVX, USOX and CRCLX
+went sideways to down. The book averaged roughly **55%** in BTC/ETH — the first week in oil and metals,
+this week in cash — and returned **+0.26%**.
+
+**Execution is not the problem. Allocation is. Stop optimising the thing that costs 1.9 USDT and fix
+the thing that costs 25.**
+
+### The rules that follow — these override the instinct to go defensive
+
+1. **FLOOR: 80% of the book in BTC/ETH at all times.** This is the default state, not a target to
+   drift toward. Going below it requires an **asset-specific** falsifier — ETF flows reversing, a
+   level breaking, a thesis dying — written down with a number.
+2. **NEVER size on a macro forecast.** Every macro call in this record was a coin flip dressed in
+   sourcing: the Fed, the ECB, the BoJ. The 2 Sept de-risk was a Fed call, it cost **3.20 USDT
+   directly** plus the rally it missed, and the Fed leg it rested on halved in probability 30 hours
+   later. **Hold through macro noise. Trade only what is specific to the asset.**
+3. **Cash is capped at 20% and always has an expiry date.** Not "a dated event" loosely — an actual
+   date, after which it deploys automatically unless a *new* written reason replaces it. In a rising
+   market every day in cash is a guaranteed loss against the benchmark.
+4. **Keep the trap screen exactly as it is.** Refusing bad trades is the one thing with a perfect
+   record — 7-for-7, plus the metals exits. **The record says: good at saying no, bad at timing.**
+   Do more of the first and none of the second.
+5. **Now that the futures wallet is reachable, "defend" means HEDGE, not retreat.** The reason
+   defence always meant cash was a false belief about the API (see the mandate section). A short perp
+   against the book expresses caution without surrendering the upside. Size it to survive an unwatched
+   gap — perps liquidate at 3am and there is no stop-loss order type here.
+
+**The failure mode this replaces:** going flat on a 50/50 macro view, in a market that rose 17%,
+and calling it risk management.
 
 ## Before sizing a single-name equity, search the SELL side
 
