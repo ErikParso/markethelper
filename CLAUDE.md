@@ -213,6 +213,7 @@ alternatives it had already found. The protocol was advisory and got skimmed. No
 12. **Run BOTH gates and fix what they report before reporting to Erik:**
     ```bash
     node lib/runcheck.mjs        # audits the DECISION (do-nothing failure modes)
+    node lib/ladder-score.mjs    # held P&L on every rung fill — kills the "4-for-4" self-flattery
     node lib/protocol-audit.mjs  # audits YOU, against the exchange and the receipts
     ```
 13. **Report — LEAD WITH THE WORLD, NOT THE SCREEN.** Set by Erik on 2026-08-26: *"do you check
@@ -433,6 +434,73 @@ being corrected.** Losing the book is an accepted outcome. Producing another fla
 **And the screen that earns its keep: the trap/beta rule is 6-for-6.** BICO (−9.8% the day after
 rejection on 19.2m cap vs 102m volume), RUNE (−13.6%), PROM, STORJ, SCRT. Do not loosen it to
 manufacture activity.
+
+## ⚠ What the record actually says after 49 runs — read this before trusting any of the above
+
+**Diagnosed 2026-09-02, after Erik said: *"you are running for more than week, not doing well,
+please do some improvements or change strategy."*** He was right. The numbers, not the narrative:
+
+**The book is 145.90 against 149.77 at inception — DOWN 2.58% in thirteen days, at its low, after
+55 orders.** Simply holding BTC over the same window was **+7%**.
+
+### 1. The ladder metric was flattering itself, and I reported it six times
+
+I called the resting-bid ladder **"4-for-4"**. Every rung did fill below the market, and each was up
+shortly afterwards — so the claim was true and worthless. **Scored on held P&L it is 0 for 5,
+−1.13 USDT on 54.07 deployed (−2.09%).**
+
+**A bid below the market fills 100% of the time in a downtrend and loses on every fill.** Fill-rate
+is not performance. **`node lib/ladder-score.mjs` runs every run and cannot say "4-for-4"** — it
+marks every fill to live prices and prints held P&L. If that number is negative, the ladder is
+averaging down and must be said so plainly.
+
+**Rule that follows: the ladder needs a trend filter.** Do not add rungs when the asset is below its
+own recent range and breadth is negative — that is not dip-buying, it is catching a falling knife on
+a schedule.
+
+### 2. Both of the worst outcomes were SINGLE-NAME bets
+
+- **USOX** (day one): half the book into one oil proxy, closed at a loss, and the late BTC entry that
+  followed is **8.43 points of the lifetime benchmark gap**.
+- **CRCLX**: **−2.0 USDT realised**, on a thesis whose bear case (Morgan Stanley UNDERWEIGHT, $38
+  target) was public before I bought.
+
+**The broad assets have been fine. Over 13 days BTC +5.0% and ETH +2.2% were the BEST things
+available**, while PAXG −3.9% and SLVX −5.9% were the worst — so the *asset selection* was not the
+problem. **The single-name bets were.**
+
+**Rule: no single-company positions.** BTC, ETH and index/metal proxies only. A ~$150 book cannot
+diversify away company-specific risk, and two of two attempts lost money.
+
+### 3. The trading itself has subtracted value
+
+55 orders in thirteen days on a $150 book. The two measurable programmes — the ladder (−1.13) and
+the single-name bets (−2.0 on CRCLX alone) — are both negative. **What HAS worked is refusal:** the
+trap screen is 7-for-7, and the metals exits are 5–7% in the money.
+
+**So the bias should be: fewer, larger, longer-held positions in broad assets; keep the screens that
+say no; stop the reallocation churn.** Being busy is not the same as being right.
+
+## Before sizing a single-name equity, search the SELL side
+
+**Cost 2.0 USDT and a 22% position, run 41 (2026-08-28).** CRCLX was bought at run 34 and sized from
+8% to 22% at run 39. Only after it fell 8% in a day did a search surface that **Morgan Stanley had
+Circle at UNDERWEIGHT with a $38 price target, cut from $106**, citing a *weaker long-term earnings
+outlook* — **precisely the reserve-income leg the entire thesis rested on.** It was public in early
+August, before the position ever existed. Two prior searches on Circle found only the bull case.
+
+**Two searches that return only the bull case are not research. They are confirmation.**
+
+**The rule: for any single-name equity, run at least one search aimed specifically at the bear
+case** — `<ticker> downgrade`, `<ticker> price target cut`, `<ticker> short thesis`, `<ticker> bear
+case` — and record what it found, including "nothing". This does not apply to broad instruments
+(BTC, ETH, index or metal proxies) where there is no analyst coverage to miss; it applies to any
+company whose earnings are the thesis.
+
+**A price falsifier does not override a thesis that has failed on evidence.** CRCLX was closed at
+86.87 with the written falsifier at 84.57, because all three legs — catalyst, rates transmission,
+and earnings outlook — were gone. A price falsifier exists to stop selling on *noise*. Waiting for a
+level after the reasons have died is obeying the letter of a rule against its own purpose.
 
 ## Evidence
 
