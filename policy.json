@@ -14,15 +14,16 @@
   },
   "risk": {
     "_note": "Trader's discretion. Leverage, direction, sizing, stops are all judgment calls now.",
-    "max_leverage": null,
+    "max_leverage": 1,
     "max_open_positions": null,
     "max_orders_per_day": null,
     "max_daily_realized_loss_pct": null,
     "max_drawdown_pct_from_peak": null,
-    "require_resting_stop": false
+    "require_resting_stop": false,
+    "_leverage_note": "Set 2026-09-17. The account DEFAULTS to 5x CROSS on perps, Pionex has no stop or take-profit orders anywhere (spot or perp, probed), and the book is looked at once a day. 1x isolated needs roughly a doubling to liquidate; anything more can be wiped out overnight with nobody watching. lib/perp.mjs also enforces this in code. This RESTRICTS the trader, it does not widen authority."
   },
   "actions": {
-    "_note": "Everything Pionex allows: spot both ways, perps long and short, bots. TRANSFER and WITHDRAW stay denied because the API key does not carry that permission and moving money out is not trading — it is outside the mandate, not a limit on it.",
+    "_note": "Everything Pionex allows: spot both ways, perps long and short at 1x, bots, and internal MAIN<->TRADE transfers (Erik 2026-09-11: you make the transfers). WITHDRAW stays denied: moving money off the exchange is not trading.",
     "allowed": [
       "OPEN_LONG",
       "OPEN_SHORT",
@@ -50,8 +51,8 @@
     "min_to_close": null
   },
   "research": {
-    "_note": "NOT a discretionary risk limit — a completeness check on the pass-2 sweep. Set require_coverage_for_opens to false to disable it entirely. Erik owns this switch; the trader must not flip it. Added after run 4 (2026-08-20) skipped the wide sweep and concentrated 86% of equity in one thesis without ranking it against alternatives it had already researched. Gates OPEN_LONG/OPEN_SHORT/ADD only — CLOSE and REDUCE are never blocked, because defending the book must not wait on paperwork.",
-    "require_coverage_for_opens": true,
+    "_note": "RETIRED 2026-09-11 with coverage.mjs. preflight no longer reads this. The situation strategy hunts mechanisms with lib/universe.mjs instead of sweeping a fixed watchlist on a timer.",
+    "require_coverage_for_opens": false,
     "coverage_max_age_min": 90
   },
   "cooldowns": {
