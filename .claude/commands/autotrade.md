@@ -35,9 +35,10 @@ node lib/universe.mjs          # ~330 spot + ~610 perps: movers, funding extreme
 ## 3. Build the plan in sleeve order
 
 1. **Situations** — up to 2, 20–35% each (tokenized spot ≤ 15%)
-2. **Carry** — up to ~35%: `node lib/carry.mjs plan BASE USDT`. Prefer non-tokenized (BNB-type);
-   the tool refuses tokenized carries on weekends
-3. **Working orders** — ~10–15% as bid capital: `node lib/ladder.mjs plan [--cash N]`
+2. **Carry** — up to ~35%. **Perp orders are currently DENIED for this account** (see CLAUDE.md ⛔), so use
+   **Earn Arbitrage**: `node lib/earn.mjs arb products`. Perp carry (`carry.mjs`) only once re-verified
+3. **Working orders** — ~10–25%: **Dual Investment** (`node lib/earn.mjs dual scan BTC buy`, paid to
+   wait, settles at expiry) or plain limits (`node lib/ladder.mjs plan`, fill on any touch)
 4. **Core BTC/ETH** — the residual. **Not a floor.**
 
 ## 4. ⚠ STOP — present the plan, wait for Erik
@@ -48,7 +49,9 @@ In chat: **instrument, direction, size, mechanism** for every order and transfer
 After confirmation:
 
 ```bash
-node lib/carry.mjs open BASE USDT
+node lib/earn.mjs arb stake ID USDT
+node lib/earn.mjs dual invest PRODUCT_ID AMOUNT
+node lib/carry.mjs open BASE USDT               # only once perps are re-verified
 node lib/ladder.mjs place '<json from plan>'
 node lib/preflight.mjs '<json>' && node lib/perp.mjs order '<json>'     # directional perp
 ```

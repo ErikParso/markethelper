@@ -81,12 +81,27 @@ Allocate in this order, every run:
 | Sleeve | Size | What it is |
 |---|---|---|
 | **1. Situations** | up to 2 × 20–35% | Named mechanism, judgement call. Perps at 1x preferred (see 5) |
-| **2. Carry** | up to ~35% of equity | Delta-neutral funding capture — earns without a directional view (see 7) |
-| **3. Working orders** | ~10–15% as bid capital | Resting orders so the book trades while unattended (see 6) |
+| **2. Carry** | up to ~35% of equity | Direction-free yield. **While perps are blocked: Pionex Earn Arbitrage** (see 7) |
+| **3. Working orders** | ~10–25% | **Dual Investment buy-low / sell-high** — paid to wait — or plain limits (see 6) |
 | **4. Core BTC/ETH** | **whatever is left** | Beta, so spare capital is never idle cash |
 
 Idle cash is still a failure. But **passive beta is not a strategy either** — it is what fills the
 gaps between the three sleeves that actually work.
+
+### ⛔ PERP ORDERS ARE BLOCKED FOR THIS ACCOUNT — verified 2026-09-17
+
+**Every perp order is rejected: `TRADE_TYPE_DENIED — user denied not in whitelist`.** Tested with
+unfillable limit orders on **BNB, BTC, CRCLX and USOX**, crypto and tokenized alike. So this is
+account-level, not symbol-level. The perp **read** endpoints, the leverage/margin **settings** and
+spot↔futures **transfers** all work. **Only placing an order is denied.**
+
+**Until Erik gets the account whitelisted, do NOT plan any perp trade.** That rules out sleeve 1's
+perp expression, the whole of sleeve 2 (carry needs the short leg), and every short. Sleeves 5 and 7
+below describe how it works *once unblocked*. Re-test with an unfillable limit
+(`node lib/perp.mjs order` far from market, then `cancel`) before planning around perps again.
+
+**Never open a carry's spot leg while the perp is unverified** — `carry.mjs` buys spot first, so a
+denied short leaves an unhedged long nobody approved.
 
 ### 5. Both directions — perps at 1x, preferred for directional bets
 
@@ -113,6 +128,16 @@ market — **five fills, five profitable** — and a trend filter switched it of
   The difference is that levels are re-read and re-judged every run.
 - `lib/snapshot.mjs` prints **⚠ NONE** when nothing is resting. Treat that as a defect to fix.
 
+**Prefer Dual Investment over a plain limit — it pays you to wait.** `node lib/earn.mjs dual scan BTC buy`
+lists every buy-low strike with its term yield (2026-09-17: BTC 75,000 for 8 days paid **0.85%**, ETH
+2,400 paid **1.615%**, whether or not they filled). `dual scan BTC sell` does the same for selling held
+coin above market. The trade-offs are real and decide which to use:
+- **It settles on the 08:00 UTC expiry price only.** An intraday dip that recovers does not fill it; a
+  plain limit would have.
+- **It is locked until expiry.** A plain limit can be cancelled in a second.
+- So: **dual for levels you would be happy to hold through expiry, plain limits for levels you want
+  filled on any touch.** Prefer terms of 1–15 days, so the book re-decides at least every two weeks.
+
 ### 7. Funding carry — income that does not need a directional call
 
 **Long spot + short perp, same size, 1x isolated.** Price exposure cancels; what remains is the
@@ -128,6 +153,11 @@ funding shorts receive while longs are crowded, plus basis.
   hedge ratio drifting from 1.0 by more than 5%.
 - **The legs sit in different wallets.** Spot does not protect the perp's margin. At 1x a short needs
   roughly a doubling to liquidate — check `liqDistancePct` every run anyway.
+- **While perp orders are denied, use Pionex Earn Arbitrage instead** — Pionex runs the same
+  spot-futures funding trade and pays it out as USDT yield (product 407 "Exclusive for New Users":
+  **8.4% 30-day APR** on 2026-09-17, capped at $1,500). `node lib/earn.mjs arb products` /
+  `arb stake ID USDT`. It needs no futures whitelist and no hedge management. Check the unstake terms
+  on the first stake and record them here.
 - **Be honest about the size of this.** 35% of a ~$146 book earning 15–44%/yr is roughly
   **$0.02–0.06 a day**. It is real, mechanical and direction-free. It does not make $146 an income.
 
@@ -235,6 +265,7 @@ Verify the exit before sizing the entry.
 | `lib/universe.mjs` | Whole-universe scan: movers, funding extremes, carry candidates → `state/universe.json` |
 | `lib/carry.mjs` | `plan` / `open` / `status` / `close` a delta-neutral funding carry |
 | `lib/ladder.mjs` | `plan` / `place` / `status` / `cancel` resting spot orders from 7-day structure |
+| `lib/earn.mjs` | Earn Arbitrage (`arb products|balances|stake|unstake`) and Dual Investment (`dual scan|invest|positions`) |
 | `lib/perp.mjs` | Perp orders — **forces and verifies 1x isolated first**; specs, market, positions |
 | `lib/score.mjs` | Benchmark vs hold-BTC, inception pinned |
 | `lib/preflight.mjs` | Only path to an order — HALT check, leverage cap, receipt |
